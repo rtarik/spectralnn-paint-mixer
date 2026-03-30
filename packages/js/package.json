@@ -4,6 +4,14 @@
   "license": "MIT",
   "type": "module",
   "description": "JavaScript runtime package for SpectralNN Paint Mixer.",
+  "homepage": "https://rtarik.github.io/spectralnn-paint-mixer/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtarik/spectralnn-paint-mixer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rtarik/spectralnn-paint-mixer/issues"
+  },
   "keywords": [
     "paint",
     "color-mixing",
@@ -29,6 +37,7 @@
   "scripts": {
     "build": "node ./scripts/build-package.mjs",
     "prepack": "npm run build",
+    "prepublishOnly": "npm test",
     "test": "node --test"
   }
 }
