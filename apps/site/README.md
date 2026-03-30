@@ -66,6 +66,19 @@ Preview locally:
 node scripts/preview-site.mjs
 ```
 
+Preview one released npm build locally:
+
+```bash
+npm run preview -- --runtime=@rtarik/spectralnn-paint-mixer --runtime-label=npm-alpha
+```
+
+Install the released aliases defined in `released-runtimes.json`, then preview the same released-version selector layout that GitHub Pages uses:
+
+```bash
+npm run install:released-runtimes
+npm run preview:released
+```
+
 HTTP smoke validation:
 
 ```bash
@@ -85,3 +98,4 @@ The validation strategy is:
 - the landing page validates against the built JS package output
 - shared fixtures keep JavaScript aligned with the canonical artifact
 - Kotlin validation can happen later through its own consumer integration path
+- GitHub Pages should build from `released-runtimes.json`, so the public selector only exposes published versions

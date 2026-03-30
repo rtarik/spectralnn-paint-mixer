@@ -4,7 +4,10 @@
   "type": "module",
   "scripts": {
     "build": "node ./scripts/build-site.mjs",
+    "build:released": "node ./scripts/build-release-site.mjs",
+    "install:released-runtimes": "node ./scripts/install-release-runtimes.mjs",
     "preview": "node ./scripts/preview-site.mjs",
+    "preview:released": "node ./scripts/preview-release-site.mjs",
     "smoke": "node ./scripts/smoke-site.mjs"
   }
 }

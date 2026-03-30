@@ -117,3 +117,20 @@ export function buildRuntimeSourceModule(runtimeSource) {
     '',
   ].join('\n');
 }
+
+export function buildRuntimeCatalogModule(runtimeCatalog) {
+  return [
+    `const runtimeCatalog = ${JSON.stringify(
+      runtimeCatalog ?? {
+        heading: 'Runtime',
+        defaultRuntimeId: null,
+        availableRuntimes: [],
+      },
+      null,
+      2,
+    )};`,
+    '',
+    'export default runtimeCatalog;',
+    '',
+  ].join('\n');
+}

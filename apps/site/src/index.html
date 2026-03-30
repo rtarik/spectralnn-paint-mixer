@@ -25,16 +25,16 @@
       <main>
         <section class="quick-mix-section" id="demo">
           <div class="section-heading">
-            <p class="eyebrow">Live Demo</p>
-            <h1>A paint mixer built on a physical base model plus neural residual correction.</h1>
+            <h1>Physical paint mixing with neural residual correction.</h1>
             <p>
               Instead of mixing in plain RGB, SpectralNN Paint Mixer starts from a subtractive physical baseline and uses a neural network only to correct the remaining residual errors. The demo below lets you inspect both outputs from the same recipe.
             </p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#usage">Usage</a>
-              <a class="button button-secondary" href="./technical/index.html">Technical Notes</a>
+            <div class="runtime-selector" data-runtime-selector hidden>
+              <label class="runtime-selector-label" for="runtime-selector-select" data-runtime-selector-heading>Runtime</label>
+              <div class="runtime-selector-field">
+                <select class="runtime-selector-select" id="runtime-selector-select" data-runtime-selector-select></select>
+              </div>
             </div>
-            <p class="runtime-pill" data-runtime-source>Runtime source: workspace-local</p>
           </div>
 
           <div class="quick-mix-layout">
@@ -128,19 +128,19 @@
               <div class="usage-grid">
                 <div class="usage-block">
                   <p class="eyebrow">Install</p>
-                  <pre class="code-panel"><code>npm install @rtarik/spectralnn-paint-mixer</code></pre>
+                  <pre class="code-panel"><code><span class="code-command">npm</span> <span class="code-subcommand">install</span> <span class="code-package">@rtarik/spectralnn-paint-mixer</span></code></pre>
                 </div>
                 <div class="usage-block">
                   <p class="eyebrow">Mix</p>
-                  <pre class="code-panel"><code>import { MixPortion, PaintMixers, SrgbColor } from '@rtarik/spectralnn-paint-mixer';
+                  <pre class="code-panel"><code><span class="code-keyword">import</span> { <span class="code-type">MixPortion</span>, <span class="code-type">PaintMixers</span>, <span class="code-type">SrgbColor</span> } <span class="code-keyword">from</span> <span class="code-string">'@rtarik/spectralnn-paint-mixer'</span>;
 
-const mixer = PaintMixers.default();
-const result = mixer.mixOrNull([
-  new MixPortion({ color: SrgbColor.fromHex('#E53935'), parts: 1 }),
-  new MixPortion({ color: SrgbColor.fromHex('#283593'), parts: 1 }),
+<span class="code-keyword">const</span> mixer = <span class="code-type">PaintMixers</span>.<span class="code-function">default</span>();
+<span class="code-keyword">const</span> result = mixer.<span class="code-function">mixOrNull</span>([
+  <span class="code-keyword">new</span> <span class="code-type">MixPortion</span>({ <span class="code-property">color</span>: <span class="code-type">SrgbColor</span>.<span class="code-function">fromHex</span>(<span class="code-string">'#E53935'</span>), <span class="code-property">parts</span>: <span class="code-number">1</span> }),
+  <span class="code-keyword">new</span> <span class="code-type">MixPortion</span>({ <span class="code-property">color</span>: <span class="code-type">SrgbColor</span>.<span class="code-function">fromHex</span>(<span class="code-string">'#283593'</span>), <span class="code-property">parts</span>: <span class="code-number">1</span> }),
 ]);
 
-console.log(result?.toHexString());</code></pre>
+<span class="code-type">console</span>.<span class="code-function">log</span>(result?.<span class="code-function">toHexString</span>());</code></pre>
                 </div>
               </div>
             </section>
@@ -149,23 +149,23 @@ console.log(result?.toHexString());</code></pre>
               <div class="usage-grid">
                 <div class="usage-block">
                   <p class="eyebrow">Install</p>
-                  <pre class="code-panel"><code>implementation("io.github.rtarik:spectralnn-paint-mixer-kotlin:&lt;version&gt;")</code></pre>
+                  <pre class="code-panel"><code><span class="code-function">implementation</span>(<span class="code-string">"io.github.rtarik:spectralnn-paint-mixer-kotlin:&lt;version&gt;"</span>)</code></pre>
                 </div>
                 <div class="usage-block">
                   <p class="eyebrow">Mix</p>
-                  <pre class="code-panel"><code>import io.github.rtarik.paintmixer.MixPortion
-import io.github.rtarik.paintmixer.PaintMixers
-import io.github.rtarik.paintmixer.SrgbColor
+                  <pre class="code-panel"><code><span class="code-keyword">import</span> io.github.rtarik.paintmixer.<span class="code-type">MixPortion</span>
+<span class="code-keyword">import</span> io.github.rtarik.paintmixer.<span class="code-type">PaintMixers</span>
+<span class="code-keyword">import</span> io.github.rtarik.paintmixer.<span class="code-type">SrgbColor</span>
 
-val mixer = PaintMixers.default()
-val result = mixer.mixOrNull(
-    listOf(
-        MixPortion(color = SrgbColor.fromHex("#E53935"), parts = 1),
-        MixPortion(color = SrgbColor.fromHex("#283593"), parts = 1),
+<span class="code-keyword">val</span> mixer = <span class="code-type">PaintMixers</span>.<span class="code-function">default</span>()
+<span class="code-keyword">val</span> result = mixer.<span class="code-function">mixOrNull</span>(
+    <span class="code-function">listOf</span>(
+        <span class="code-type">MixPortion</span>(<span class="code-property">color</span> = <span class="code-type">SrgbColor</span>.<span class="code-function">fromHex</span>(<span class="code-string">"#E53935"</span>), <span class="code-property">parts</span> = <span class="code-number">1</span>),
+        <span class="code-type">MixPortion</span>(<span class="code-property">color</span> = <span class="code-type">SrgbColor</span>.<span class="code-function">fromHex</span>(<span class="code-string">"#283593"</span>), <span class="code-property">parts</span> = <span class="code-number">1</span>),
     ),
 )
 
-println(result?.toHexString())</code></pre>
+<span class="code-function">println</span>(result?.<span class="code-function">toHexString</span>())</code></pre>
                 </div>
               </div>
             </section>

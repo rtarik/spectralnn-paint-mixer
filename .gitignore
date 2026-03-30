@@ -8,6 +8,7 @@ out/
 tools/training/out/
 tools/eval/out/
 tools/dataset-generator/node_modules/
+apps/site/node_modules/
 apps/site/dist/
 .npm-cache/
 local.properties

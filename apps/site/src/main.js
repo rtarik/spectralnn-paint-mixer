@@ -1,9 +1,4 @@
-import {
-  MixPortion,
-  PaintMixers,
-  SrgbColor,
-} from './lib/paint-mixer.js';
-import runtimeSource from './lib/runtime-source.js';
+import runtimeCatalog from './lib/runtime-catalog.js';
 
 const PAPER_COLOR = '#FFFFFF';
 const DEFAULT_CUSTOM_HEX = '#7A5A3A';
@@ -22,6 +17,10 @@ const DEFAULT_PROBE = [
   { pigmentId: 'blue', parts: 1 },
 ];
 
+const availableRuntimes = Array.isArray(runtimeCatalog.availableRuntimes)
+  ? runtimeCatalog.availableRuntimes
+  : [];
+
 const elements = {
   probePaletteList: document.querySelector('[data-probe-palette-list]'),
   probeRows: document.querySelector('[data-probe-rows]'),
@@ -38,26 +37,39 @@ const elements = {
   probeIngredientCount: document.querySelector('[data-probe-ingredient-count]'),
   probeTotalParts: document.querySelector('[data-probe-total-parts]'),
   probeRatioBar: document.querySelector('[data-probe-ratio-bar]'),
-  runtimeSource: document.querySelector('[data-runtime-source]'),
+  runtimeSelector: document.querySelector('[data-runtime-selector]'),
+  runtimeSelectorHeading: document.querySelector('[data-runtime-selector-heading]'),
+  runtimeSelectorSelect: document.querySelector('[data-runtime-selector-select]'),
   usageTabs: Array.from(document.querySelectorAll('[data-usage-tab]')),
   usagePanels: Array.from(document.querySelectorAll('[data-usage-panel]')),
 };
 
-const correctedMixer = PaintMixers.default();
-const baseMixer = PaintMixers.spectralBase();
-
 const state = {
   palette: DEFAULT_PALETTE.map((entry) => ({
     id: entry.id,
-    color: SrgbColor.fromHex(entry.hex),
+    hex: entry.hex,
   })),
   probeEntries: DEFAULT_PROBE.map((entry) => ({ ...entry })),
   nextCustomColorIndex: 1,
   usageTab: 'javascript',
+  runtimeId: resolveInitialRuntimeId(),
+  runtimeStatus: 'idle',
+  runtimeLoadSequence: 0,
+  runtimeError: null,
+  runtimeApi: null,
+  correctedMixer: null,
+  baseMixer: null,
 };
+
+elements.colorPickerInput.value = DEFAULT_CUSTOM_HEX;
+elements.colorHexInput.value = DEFAULT_CUSTOM_HEX;
 
 wireEvents();
 render();
+
+if (state.runtimeId != null) {
+  void selectRuntime(state.runtimeId);
+}
 
 function wireEvents() {
   elements.probeAddButton.addEventListener('click', handleProbeAddRow);
@@ -81,6 +93,79 @@ function wireEvents() {
       renderUsageTabs();
     });
   });
+
+  if (elements.runtimeSelectorSelect != null) {
+    elements.runtimeSelectorSelect.addEventListener('change', () => {
+      const selectedRuntimeId = elements.runtimeSelectorSelect.value;
+      if (selectedRuntimeId === '' || selectedRuntimeId === state.runtimeId) return;
+      void selectRuntime(selectedRuntimeId);
+    });
+  }
+}
+
+function resolveInitialRuntimeId() {
+  const params = new URLSearchParams(window.location.search);
+  const requestedRuntimeId = params.get('runtime');
+  if (requestedRuntimeId != null && availableRuntimes.some((entry) => entry.id === requestedRuntimeId)) {
+    return requestedRuntimeId;
+  }
+
+  if (runtimeCatalog.defaultRuntimeId != null && availableRuntimes.some((entry) => entry.id === runtimeCatalog.defaultRuntimeId)) {
+    return runtimeCatalog.defaultRuntimeId;
+  }
+
+  return availableRuntimes[0]?.id ?? null;
+}
+
+function currentRuntimeEntry() {
+  return availableRuntimes.find((entry) => entry.id === state.runtimeId) ?? null;
+}
+
+function syncRuntimeUrl() {
+  const url = new URL(window.location.href);
+  if (state.runtimeId == null || state.runtimeId === runtimeCatalog.defaultRuntimeId) {
+    url.searchParams.delete('runtime');
+  } else {
+    url.searchParams.set('runtime', state.runtimeId);
+  }
+  window.history.replaceState({}, '', url);
+}
+
+async function selectRuntime(runtimeId) {
+  const runtimeEntry = availableRuntimes.find((entry) => entry.id === runtimeId);
+  if (runtimeEntry == null) return;
+
+  state.runtimeId = runtimeId;
+  state.runtimeStatus = 'loading';
+  state.runtimeError = null;
+  state.runtimeLoadSequence += 1;
+  const loadSequence = state.runtimeLoadSequence;
+  render();
+
+  try {
+    const runtimeModule = await import(runtimeEntry.modulePath);
+    if (loadSequence !== state.runtimeLoadSequence) return;
+
+    state.runtimeApi = {
+      MixPortion: runtimeModule.MixPortion,
+      PaintMixers: runtimeModule.PaintMixers,
+      SrgbColor: runtimeModule.SrgbColor,
+    };
+    state.correctedMixer = runtimeModule.PaintMixers.default();
+    state.baseMixer = runtimeModule.PaintMixers.spectralBase();
+    state.runtimeStatus = 'ready';
+    syncRuntimeUrl();
+    render();
+  } catch (error) {
+    if (loadSequence !== state.runtimeLoadSequence) return;
+
+    state.runtimeApi = null;
+    state.correctedMixer = null;
+    state.baseMixer = null;
+    state.runtimeStatus = 'error';
+    state.runtimeError = error instanceof Error ? error.message : String(error);
+    render();
+  }
 }
 
 function handleProbeAddRow() {
@@ -101,7 +186,7 @@ function handleProbeReset() {
 function handleAddColorSubmit(event) {
   event.preventDefault();
   const normalizedHex = normalizeHex(elements.colorHexInput.value) ?? elements.colorPickerInput.value.toUpperCase();
-  const existing = state.palette.find((pigment) => pigment.color.toHexString() === normalizedHex);
+  const existing = state.palette.find((pigment) => pigment.hex === normalizedHex);
   if (existing != null) {
     addPigmentToProbe(existing.id);
     elements.colorPickerInput.value = normalizedHex;
@@ -113,7 +198,7 @@ function handleAddColorSubmit(event) {
   state.nextCustomColorIndex += 1;
   state.palette.push({
     id: pigmentId,
-    color: SrgbColor.fromHex(normalizedHex),
+    hex: normalizedHex,
   });
   elements.colorPickerInput.value = normalizedHex;
   elements.colorHexInput.value = normalizedHex;
@@ -123,7 +208,7 @@ function handleAddColorSubmit(event) {
 function render() {
   renderProbe();
   renderUsageTabs();
-  renderRuntimeSource();
+  renderRuntimeSelector();
 }
 
 function renderProbe() {
@@ -141,23 +226,42 @@ function renderProbe() {
   renderProbeRatioBar(recipe);
 }
 
-function renderRuntimeSource() {
-  if (elements.runtimeSource == null) return;
+function renderRuntimeSelector() {
+  if (
+    elements.runtimeSelector == null
+    || elements.runtimeSelectorHeading == null
+    || elements.runtimeSelectorSelect == null
+  ) {
+    return;
+  }
 
-  const packageId = `${runtimeSource.packageName}@${runtimeSource.packageVersion}`;
-  const usesAlias = runtimeSource.requestedSpecifier != null
-    && runtimeSource.requestedSpecifier !== runtimeSource.packageName
-    && runtimeSource.requestedSpecifier !== runtimeSource.label;
-  const aliasSuffix = usesAlias ? ` via ${runtimeSource.requestedSpecifier}` : '';
+  const options = availableRuntimes.length > 0
+    ? availableRuntimes
+    : [{
+      id: '',
+      label: 'No runtimes available',
+    }];
 
-  elements.runtimeSource.textContent = `Runtime source: ${runtimeSource.label}${aliasSuffix} (${packageId})`;
+  elements.runtimeSelector.hidden = false;
+  elements.runtimeSelectorHeading.textContent = runtimeCatalog.heading ?? 'Runtime';
+  elements.runtimeSelectorSelect.innerHTML = '';
+
+  for (const optionData of options) {
+    const option = document.createElement('option');
+    option.textContent = optionData.label;
+    option.value = optionData.id;
+    option.selected = optionData.id === state.runtimeId;
+    elements.runtimeSelectorSelect.append(option);
+  }
+
+  elements.runtimeSelectorSelect.disabled = options.length <= 1 || state.runtimeStatus === 'loading';
 }
 
 function renderProbePalette() {
   elements.probePaletteList.innerHTML = '';
 
   for (const pigment of state.palette) {
-    const hex = pigment.color.toHexString();
+    const hex = pigment.hex;
     const button = document.createElement('button');
     button.className = 'quick-mix-chip';
     button.type = 'button';
@@ -185,7 +289,7 @@ function renderProbeRows() {
 
   const paletteOptions = state.palette.map((pigment) => ({
     id: pigment.id,
-    label: pigment.color.toHexString(),
+    label: pigment.hex,
   }));
 
   state.probeEntries.forEach((entry, index) => {
@@ -295,8 +399,8 @@ function resolveProbeRecipe() {
     if (pigment == null || entry.parts <= 0) return [];
     return [{
       id: pigment.id,
-      label: pigment.color.toHexString(),
-      color: pigment.color,
+      label: pigment.hex,
+      hex: pigment.hex,
       parts: entry.parts,
     }];
   });
@@ -311,18 +415,35 @@ function summarizeProbe(recipe) {
     };
   }
 
+  if (state.runtimeStatus === 'loading' || state.runtimeStatus === 'idle') {
+    return {
+      correctedHex: PAPER_COLOR,
+      baseHex: PAPER_COLOR,
+      summary: `Loading ${currentRuntimeEntry()?.label ?? 'selected'} runtime...`,
+    };
+  }
+
+  if (state.runtimeStatus === 'error' || state.runtimeApi == null || state.correctedMixer == null || state.baseMixer == null) {
+    return {
+      correctedHex: PAPER_COLOR,
+      baseHex: PAPER_COLOR,
+      summary: `Unable to load ${currentRuntimeEntry()?.label ?? 'selected'} runtime.`,
+    };
+  }
+
+  const { MixPortion, SrgbColor } = state.runtimeApi;
   const portions = recipe.map((entry) => new MixPortion({
-    color: entry.color,
+    color: SrgbColor.fromHex(entry.hex),
     parts: entry.parts,
   }));
-  const correctedHex = correctedMixer.mixOrNull(portions)?.toHexString() ?? PAPER_COLOR;
-  const baseHex = baseMixer.mixOrNull(portions)?.toHexString() ?? PAPER_COLOR;
+  const correctedHex = state.correctedMixer.mixOrNull(portions)?.toHexString() ?? PAPER_COLOR;
+  const baseHex = state.baseMixer.mixOrNull(portions)?.toHexString() ?? PAPER_COLOR;
   const recipeLabel = recipe.map((entry) => `${entry.label} × ${entry.parts}`).join(' + ');
 
   return {
     correctedHex,
     baseHex,
-    summary: `${recipeLabel}`,
+    summary: recipeLabel,
   };
 }
 
@@ -340,7 +461,7 @@ function renderProbeRatioBar(recipe) {
   for (const entry of recipe) {
     const segment = document.createElement('span');
     segment.className = 'quick-mix-ratio-segment';
-    segment.style.setProperty('--segment-color', entry.color.toHexString());
+    segment.style.setProperty('--segment-color', entry.hex);
     segment.style.setProperty('flex-grow', String(entry.parts));
     segment.title = `${entry.label} × ${entry.parts}`;
     elements.probeRatioBar.append(segment);
@@ -368,8 +489,5 @@ function normalizeHex(value) {
   if (!/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(prefixed)) {
     return null;
   }
-  return SrgbColor.fromHex(prefixed).toHexString();
+  return `#${prefixed.slice(1).toUpperCase()}`;
 }
-
-elements.colorPickerInput.value = DEFAULT_CUSTOM_HEX;
-elements.colorHexInput.value = DEFAULT_CUSTOM_HEX;

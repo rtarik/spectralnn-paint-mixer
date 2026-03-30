@@ -1,0 +1,12 @@
+{
+  "defaultReleaseId": "alpha-1",
+  "releases": [
+    {
+      "id": "alpha-1",
+      "label": "0.1.0-alpha.1",
+      "packageName": "@rtarik/spectralnn-paint-mixer",
+      "version": "0.1.0-alpha.1",
+      "specifier": "spectralnn-paint-mixer-alpha-1"
+    }
+  ]
+}
