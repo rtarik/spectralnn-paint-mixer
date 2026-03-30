@@ -1,0 +1,13 @@
+.gradle/
+.idea/
+.kotlin/
+.DS_Store
+build/
+**/build/
+out/
+tools/training/out/
+tools/eval/out/
+tools/dataset-generator/node_modules/
+apps/site/dist/
+.npm-cache/
+local.properties

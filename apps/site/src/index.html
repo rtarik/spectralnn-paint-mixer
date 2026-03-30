@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SpectralNN Paint Mixer</title>
+    <meta
+      name="description"
+      content="Paint-aware color mixing built on a physical base model plus neural residual correction, with a live demo and usage snippets."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html">SpectralNN Paint Mixer</a>
+        <nav class="topnav" aria-label="Primary">
+          <a href="#demo">Demo</a>
+          <a href="#usage">Use It</a>
+          <a href="./technical/index.html">Technical Notes</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="quick-mix-section" id="demo">
+          <div class="section-heading">
+            <p class="eyebrow">Live Demo</p>
+            <h1>A paint mixer built on a physical base model plus neural residual correction.</h1>
+            <p>
+              Instead of mixing in plain RGB, SpectralNN Paint Mixer starts from a subtractive physical baseline and uses a neural network only to correct the remaining residual errors. The demo below lets you inspect both outputs from the same recipe.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#usage">Usage</a>
+              <a class="button button-secondary" href="./technical/index.html">Technical Notes</a>
+            </div>
+            <p class="runtime-pill" data-runtime-source>Runtime source: workspace-local</p>
+          </div>
+
+          <div class="quick-mix-layout">
+            <article class="quick-mix-card quick-mix-builder">
+              <h3>Recipe Builder</h3>
+              <p>
+                Click a swatch to add it to the recipe. Clicking it again increases its parts, and you can also add your own colors below.
+              </p>
+
+              <div class="quick-mix-palette" data-probe-palette-list></div>
+              <form class="quick-mix-add-color" data-add-color-form>
+                <label class="quick-mix-add-control quick-mix-add-control-color">
+                  <span>New color</span>
+                  <input data-color-picker-input type="color" value="#7A5A3A" />
+                </label>
+                <label class="quick-mix-add-control">
+                  <span>Hex</span>
+                  <input data-color-hex-input type="text" value="#7A5A3A" maxlength="9" spellcheck="false" />
+                </label>
+                <button class="button button-secondary" type="submit">Add Color</button>
+              </form>
+              <div class="probe-rows" data-probe-rows></div>
+
+              <div class="probe-actions">
+                <button class="button button-secondary" data-probe-add-button type="button">Add Ingredient</button>
+                <button class="button button-secondary" data-probe-reset-button type="button">Reset Recipe</button>
+              </div>
+            </article>
+
+            <article class="quick-mix-card quick-mix-result">
+              <h3>Live Result</h3>
+              <p class="probe-summary" data-probe-summary>
+                Start with a simple two-color recipe to inspect both runtime paths.
+              </p>
+
+              <dl class="quick-mix-meta">
+                <div>
+                  <dt>Ingredients</dt>
+                  <dd data-probe-ingredient-count>2</dd>
+                </div>
+                <div>
+                  <dt>Total Parts</dt>
+                  <dd data-probe-total-parts>2</dd>
+                </div>
+              </dl>
+
+              <div class="quick-mix-ratio-bar" data-probe-ratio-bar></div>
+
+              <div class="probe-results">
+                <article class="probe-result-card">
+                  <div class="probe-result-head">
+                    <h4>SpectralNN Output</h4>
+                    <p>Physical base model plus neural residual correction.</p>
+                  </div>
+                  <div class="probe-result-preview" data-probe-swatch="corrected"></div>
+                  <code class="probe-result-hex" data-probe-hex="corrected">#FFFFFF</code>
+                </article>
+                <article class="probe-result-card">
+                  <div class="probe-result-head">
+                    <h4>Physical Base Model</h4>
+                    <p>The same recipe before neural correction is applied.</p>
+                  </div>
+                  <div class="probe-result-preview" data-probe-swatch="base"></div>
+                  <code class="probe-result-hex" data-probe-hex="base">#FFFFFF</code>
+                </article>
+              </div>
+
+              <p class="quick-mix-note">
+                Both panels are computed from the exact same recipe, so the difference you see is the residual model alone.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="usage-section" id="usage">
+          <div class="section-heading">
+            <p class="eyebrow">Use It</p>
+            <h2>Drop the mixer into JavaScript or Kotlin in a few lines.</h2>
+            <p>
+              The runtime API stays intentionally small: colors, integer parts, and a mixer entry point. Switch languages below to see the same recipe shape in both runtimes.
+            </p>
+          </div>
+
+          <article class="usage-card">
+            <div class="usage-tabs" role="tablist" aria-label="Runtime snippets">
+              <button class="usage-tab is-active" data-usage-tab="javascript" type="button">JavaScript</button>
+              <button class="usage-tab" data-usage-tab="kotlin" type="button">Kotlin</button>
+            </div>
+
+            <section class="usage-panel is-active" data-usage-panel="javascript">
+              <div class="usage-grid">
+                <div class="usage-block">
+                  <p class="eyebrow">Install</p>
+                  <pre class="code-panel"><code>npm install @rtarik/spectralnn-paint-mixer</code></pre>
+                </div>
+                <div class="usage-block">
+                  <p class="eyebrow">Mix</p>
+                  <pre class="code-panel"><code>import { MixPortion, PaintMixers, SrgbColor } from '@rtarik/spectralnn-paint-mixer';
+
+const mixer = PaintMixers.default();
+const result = mixer.mixOrNull([
+  new MixPortion({ color: SrgbColor.fromHex('#E53935'), parts: 1 }),
+  new MixPortion({ color: SrgbColor.fromHex('#283593'), parts: 1 }),
+]);
+
+console.log(result?.toHexString());</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <section class="usage-panel" data-usage-panel="kotlin" hidden>
+              <div class="usage-grid">
+                <div class="usage-block">
+                  <p class="eyebrow">Install</p>
+                  <pre class="code-panel"><code>implementation("io.github.rtarik:spectralnn-paint-mixer-kotlin:&lt;version&gt;")</code></pre>
+                </div>
+                <div class="usage-block">
+                  <p class="eyebrow">Mix</p>
+                  <pre class="code-panel"><code>import io.github.rtarik.paintmixer.MixPortion
+import io.github.rtarik.paintmixer.PaintMixers
+import io.github.rtarik.paintmixer.SrgbColor
+
+val mixer = PaintMixers.default()
+val result = mixer.mixOrNull(
+    listOf(
+        MixPortion(color = SrgbColor.fromHex("#E53935"), parts = 1),
+        MixPortion(color = SrgbColor.fromHex("#283593"), parts = 1),
+    ),
+)
+
+println(result?.toHexString())</code></pre>
+                </div>
+              </div>
+            </section>
+          </article>
+        </section>
+
+        <section class="how-strip" aria-label="How it works">
+          <article>
+            <h2>Paint-Aware</h2>
+            <p>Starts from a subtractive spectral mix instead of straight channel interpolation.</p>
+          </article>
+          <article>
+            <h2>Inspectable</h2>
+            <p>Compare the corrected result against the base engine to see exactly what the residual model adds.</p>
+          </article>
+          <article>
+            <h2>Portable</h2>
+            <p>Use the same model artifact and fixture corpus across JavaScript and Kotlin.</p>
+          </article>
+        </section>
+
+        <section class="resource-strip" aria-label="Project navigation">
+          <article class="resource-card">
+            <p class="eyebrow">Technical</p>
+            <h2>Read the architecture</h2>
+            <p>
+              Dive into the two-stage pipeline, the shared artifact contract, and the reasoning behind the residual correction model.
+            </p>
+            <a class="resource-link" href="./technical/index.html#pipeline-contract">Open technical page</a>
+          </article>
+
+          <article class="resource-card">
+            <p class="eyebrow">Repository</p>
+            <h2>Library repository</h2>
+            <p>
+              Browse the source, release notes, and deployment workflows for the standalone library repository on GitHub.
+            </p>
+            <a class="resource-link" href="https://github.com/rtarik/spectralnn-paint-mixer">Open GitHub repository</a>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Current phase: content polish and browser validation before public package links go live.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Technical Notes | SpectralNN Paint Mixer</title>
+    <meta
+      name="description"
+      content="Technical notes for SpectralNN Paint Mixer: spectral base mixing, learned residual correction, shared artifacts, and validation."
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <div class="page-shell page-shell-technical">
+      <header class="topbar">
+        <a class="brand" href="../index.html">SpectralNN Paint Mixer</a>
+        <nav class="topnav" aria-label="Primary">
+          <a href="../index.html#demo">Demo</a>
+          <a href="./index.html">Technical Notes</a>
+        </nav>
+      </header>
+
+      <main class="technical-page">
+        <section class="section-heading">
+          <p class="eyebrow">Technical Notes</p>
+          <h1>Why this mixer is built as a two-stage pipeline.</h1>
+          <p>
+            SpectralNN Paint Mixer is intentionally not a pure neural painter. The base engine carries the physical prior, the residual stage corrects its repeatable blind spots, and the shared artifact contract keeps runtimes and training tooling pointed at the same model family.
+          </p>
+        </section>
+
+        <section class="technical-flow" id="pipeline-contract">
+          <article class="flow-step">
+            <p class="eyebrow">Step 1</p>
+            <h2>Mix inputs stay explicit</h2>
+            <p>The runtime starts from pigment colors plus integer parts, not from an already-baked RGB blend.</p>
+          </article>
+          <article class="flow-step">
+            <p class="eyebrow">Step 2</p>
+            <h2>BaseMixEngine runs first</h2>
+            <p>The base engine reconstructs pigment-like reflectance and performs subtractive mixing before any learned correction happens.</p>
+          </article>
+          <article class="flow-step">
+            <p class="eyebrow">Step 3</p>
+            <h2>ResidualCorrectionModel nudges</h2>
+            <p>The residual network sees the same mix inputs plus the base result and predicts only the correction delta.</p>
+          </article>
+          <article class="flow-step">
+            <p class="eyebrow">Step 4</p>
+            <h2>PipelinePaintMixer composes both</h2>
+            <p>The public mixer stays small while still allowing experiments with alternative base engines or residual stages.</p>
+          </article>
+        </section>
+
+        <section class="technical-callout">
+          <div>
+            <p class="eyebrow">Runtime Shape</p>
+            <h2>Residual learning is a correction strategy, not the whole engine.</h2>
+          </div>
+          <pre class="code-panel"><code>MixPortion[] 
+  -> BaseMixEngine.mixOrNull(...)
+  -> ResidualCorrectionModel.correct(...)
+  -> SrgbColor</code></pre>
+        </section>
+
+        <section class="technical-grid">
+          <article class="technical-card" id="problem">
+            <h2>Problem</h2>
+            <p>RGB interpolation is good at screen blending, not paint behavior. Pigments absorb and reflect different wavelengths unevenly, so two paints that look vivid on their own can collapse into muted mixtures that naive channel interpolation never predicts well.</p>
+            <ul class="bullet-list">
+              <li>Paint mixing is subtractive, not additive.</li>
+              <li>The same pair can behave very differently at 1:1 versus 3:1.</li>
+              <li>Good results need a physical prior or a strong approximation of one.</li>
+            </ul>
+          </article>
+
+          <article class="technical-card">
+            <h2>Base Engine</h2>
+            <p>The default base engine is `spectral_ks_v1`. It reconstructs pigment-like reflectance and mixes in spectral space, then converts the result back to sRGB for runtime output. This is where most of the physically plausible behavior comes from.</p>
+            <ul class="bullet-list">
+              <li>It is deterministic and language-portable.</li>
+              <li>It gives the model a strong starting point before learning anything.</li>
+              <li>It can be swapped in the future through the explicit `BaseMixEngine` interface.</li>
+            </ul>
+          </article>
+
+          <article class="technical-card">
+            <h2>Residual Model</h2>
+            <p>The learned stage does not replace the base engine. It learns a compact correction on top of the base result, which keeps the model focused on systematic errors instead of relearning the whole mixing problem from scratch.</p>
+            <ul class="bullet-list">
+              <li>Inputs include the paint colors, ratios, and base mixed color.</li>
+              <li>The artifact carries normalization stats and dense weights.</li>
+              <li>The model is tied to the base engine through `baseEngineId`.</li>
+            </ul>
+          </article>
+
+          <article class="technical-card" id="artifact-contract">
+            <h2>Shared Artifact</h2>
+            <p>Kotlin and JavaScript consume the same canonical JSON artifact. That file carries the runtime contract, mixing parameters, normalization vectors, network shape, and provenance metadata. The runtime can stay thin because the artifact is explicit.</p>
+            <ul class="bullet-list">
+              <li>One artifact format for both runtimes.</li>
+              <li>`baseEngineId` prevents mismatched pipeline wiring.</li>
+              <li>The generated language wrappers are derived from the same source artifact.</li>
+            </ul>
+          </article>
+
+          <article class="technical-card">
+            <h2>Shared Fixtures</h2>
+            <p>The fixture corpus is just as important as the artifact. Curated parity cases and residual-stage fixtures keep the Kotlin and JavaScript ports honest and make regression checking much cheaper than visual spot checks alone.</p>
+            <ul class="bullet-list">
+              <li>Curated parity tracks end-to-end expected outputs.</li>
+              <li>Residual parity isolates the learned correction stage.</li>
+              <li>The browser demo is another consumer of the same runtime, not a special case.</li>
+            </ul>
+          </article>
+
+          <article class="technical-card" id="fine-tuning">
+            <h2>Fine-Tuning</h2>
+            <p>Future quality improvements come from curated ground-truth samples rather than widening the public API. The runtime stays stable while the data and artifact keep evolving.</p>
+            <ol class="number-list">
+              <li>Start from the baseline artifact and the current checkpoint.</li>
+              <li>Add or refine curated ground-truth cases with source notes.</li>
+              <li>Export training data against the chosen base engine.</li>
+              <li>Warm-start the residual model instead of retraining from cold.</li>
+              <li>Compare against fixtures before promoting the next artifact.</li>
+            </ol>
+          </article>
+
+          <article class="technical-card">
+            <h2>Experimentation</h2>
+            <p>The pipeline split exists so different developers can try another base engine without rewriting the rest of the stack. The important rule is that the correction artifact must declare which base engine it was trained against.</p>
+            <ul class="bullet-list">
+              <li>Swap the base engine, then regenerate curated training data.</li>
+              <li>Retrain or fine-tune the residual model against that new prior.</li>
+              <li>Use shared fixtures to measure whether the swap is actually better.</li>
+            </ul>
+          </article>
+
+          <article class="technical-card" id="validation">
+            <h2>Validation</h2>
+            <p>The validation story is intentionally split across real consumers. Kotlin is validated through a local-publish consumer integration path, and JavaScript is validated by this landing page using the actual runtime in a browser-facing demo.</p>
+            <ul class="bullet-list">
+              <li>Kotlin validation happens through a published-consumer integration path.</li>
+              <li>JavaScript validation happens through the demo site and shared tests.</li>
+              <li>The same artifact and fixtures support both sides.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="technical-callout">
+          <div>
+            <p class="eyebrow">Design Principle</p>
+            <h2>Keep the public API boring, keep the model iteration flexible.</h2>
+          </div>
+          <p>
+            The runtime surface is intentionally small: colors, portions, mixers, artifacts, and the pipeline seam. Training, curation, and evaluation keep changing underneath that surface, which is exactly why they should stay in tooling and artifacts rather than in the public API.
+          </p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

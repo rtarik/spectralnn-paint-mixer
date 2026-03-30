@@ -1,0 +1,162 @@
+{
+  "guardrailRatios": [
+    [2, 1],
+    [3, 2],
+    [1, 1],
+    [2, 3],
+    [1, 2]
+  ],
+  "pairs": [
+    {
+      "kind": "purple",
+      "entries": [
+        { "palette": "modern", "name": "cyan" },
+        { "palette": "acrylics", "name": "red" }
+      ],
+      "targetPath": {
+        "warmDominant": "#6F3A4F",
+        "balanced": "#71445C",
+        "coolDominant": "#7A5680"
+      }
+    },
+    {
+      "kind": "purple",
+      "entries": [
+        { "palette": "primary", "name": "red" },
+        { "palette": "miniatures", "name": "blue" }
+      ],
+      "targetPath": {
+        "warmDominant": "#753D54",
+        "balanced": "#68395E",
+        "coolDominant": "#603D66"
+      }
+    },
+    {
+      "kind": "purple",
+      "entries": [
+        { "palette": "acrylics", "name": "red" },
+        { "palette": "acrylics", "name": "cerulean" }
+      ],
+      "targetPath": {
+        "warmDominant": "#653548",
+        "balanced": "#673A5E",
+        "coolDominant": "#603D65"
+      }
+    },
+    {
+      "kind": "purple",
+      "entries": [
+        { "palette": "oils", "name": "crimson" },
+        { "palette": "oils", "name": "phthaloBlue" }
+      ],
+      "targetPath": {
+        "warmDominant": "#813952",
+        "balanced": "#7A3764",
+        "coolDominant": "#743976"
+      }
+    },
+    {
+      "kind": "purple",
+      "entries": [
+        { "palette": "oils", "name": "crimson" },
+        { "palette": "oils", "name": "prussianBlue" }
+      ]
+    },
+    {
+      "kind": "path",
+      "entries": [
+        { "palette": "modern", "name": "cyan" },
+        { "palette": "oils", "name": "brightRed" }
+      ],
+      "targetPath": {
+        "firstDominant": "#6B6B64",
+        "balanced": "#70563C",
+        "secondDominant": "#7D543A"
+      }
+    },
+    {
+      "kind": "path",
+      "entries": [
+        { "palette": "acrylics", "name": "cerulean" },
+        { "palette": "oils", "name": "brightRed" }
+      ],
+      "targetPath": {
+        "firstDominant": "#51474D",
+        "balanced": "#57392F",
+        "secondDominant": "#663A2F"
+      }
+    },
+    {
+      "kind": "path",
+      "entries": [
+        { "palette": "primary", "name": "red" },
+        { "palette": "watercolors", "name": "cerulean" }
+      ],
+      "targetPath": {
+        "firstDominant": "#625857",
+        "balanced": "#32575C",
+        "secondDominant": "#2C5A69"
+      }
+    },
+    {
+      "kind": "path",
+      "entries": [
+        { "palette": "primary", "name": "red" },
+        { "palette": "industrial", "name": "blue" }
+      ],
+      "targetPath": {
+        "firstDominant": "#5E5452",
+        "balanced": "#2E5156",
+        "secondDominant": "#27515F"
+      }
+    },
+    {
+      "kind": "path",
+      "entries": [
+        { "palette": "primary", "name": "red" },
+        { "palette": "acrylics", "name": "cerulean" }
+      ],
+      "targetPath": {
+        "firstDominant": "#655C5C",
+        "balanced": "#355C62",
+        "secondDominant": "#2F6175"
+      }
+    },
+    {
+      "kind": "path",
+      "entries": [
+        { "palette": "watercolors", "name": "redPale" },
+        { "palette": "industrial", "name": "blue" }
+      ],
+      "targetPath": {
+        "firstDominant": "#6F512B",
+        "balanced": "#49502B",
+        "secondDominant": "#3F5140"
+      }
+    },
+    {
+      "kind": "earth",
+      "entries": [
+        { "palette": "industrial", "name": "orange" },
+        { "palette": "industrial", "name": "pigeonBlue" }
+      ],
+      "targetPath": {
+        "warmDominant": "#9B6A47",
+        "balanced": "#7A6558",
+        "coolDominant": "#66616C"
+      }
+    },
+    {
+      "kind": "earth",
+      "entries": [
+        { "palette": "oils", "name": "phthaloBlue" },
+        { "palette": "oils", "name": "vanDykeBrown" }
+      ],
+      "targetPath": {
+        "warmDominant": "#3A3532",
+        "balanced": "#2D4458",
+        "coolDominant": "#223041"
+      }
+    }
+  ]
+}

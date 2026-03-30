@@ -1,0 +1,68 @@
+{
+  "fixtureSetVersion": 1,
+  "modelId": "baseline-v1",
+  "createdAt": "2026-03-29T23:10:00Z",
+  "referenceReport": "external/latest_report.txt",
+  "cases": [
+    {
+      "id": "primary-red-blue-balanced",
+      "inputs": ["#E53935", "#283593"],
+      "parts": [1, 1],
+      "physicalHex": "#623E45",
+      "predictedHex": "#633743",
+      "targetHex": "#683841",
+      "referenceDeltaE": 3.1098,
+      "maxChannelStep": 1
+    },
+    {
+      "id": "oils-crimson-phthaloBlue-balanced",
+      "inputs": ["#8D0001", "#000F89"],
+      "parts": [1, 1],
+      "physicalHex": "#260B14",
+      "predictedHex": "#78355D",
+      "targetHex": "#7A3764",
+      "referenceDeltaE": 3.1935,
+      "maxChannelStep": 1
+    },
+    {
+      "id": "oils-yellow-phthaloBlue-balanced",
+      "inputs": ["#F7E309", "#000F89"],
+      "parts": [1, 1],
+      "physicalHex": "#3A8D47",
+      "predictedHex": "#3C8D46",
+      "targetHex": "#3A8D47",
+      "referenceDeltaE": 0.7087,
+      "maxChannelStep": 1
+    },
+    {
+      "id": "primary-red-blue-white-equal",
+      "inputs": ["#E53935", "#283593", "#FFFFFF"],
+      "parts": [1, 1, 1],
+      "physicalHex": "#A1757E",
+      "predictedHex": "#A0757E",
+      "targetHex": "#A1757E",
+      "referenceDeltaE": 0.4386,
+      "maxChannelStep": 1
+    },
+    {
+      "id": "modern-acrylics-cyan-red-balanced",
+      "inputs": ["#00AEEF", "#D72828"],
+      "parts": [1, 1],
+      "physicalHex": "#5A5556",
+      "predictedHex": "#6F4856",
+      "targetHex": "#71445C",
+      "referenceDeltaE": 6.2523,
+      "maxChannelStep": 1
+    },
+    {
+      "id": "industrial-orange-pigeonBlue-balanced",
+      "inputs": ["#E25303", "#6C7C98"],
+      "parts": [1, 1],
+      "physicalHex": "#90642B",
+      "predictedHex": "#83614B",
+      "targetHex": "#7A6558",
+      "referenceDeltaE": 8.6638,
+      "maxChannelStep": 1
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "ground-truth-v1",
+  "createdAt": "2026-03-30T00:00:00Z",
+  "description": "Append-only reviewed paint-mix targets used for evaluation and future fine-tuning.",
+  "colorSpace": "srgb",
+  "targetEncoding": "hex_rgb_opaque",
+  "portionUnit": "parts",
+  "supportedSourceTypes": [
+    "curated_manual_target",
+    "measured_physical_mix",
+    "measured_spectral_mix",
+    "imported_reference_target"
+  ],
+  "supportedReviewStatuses": [
+    "draft",
+    "reviewed",
+    "approved"
+  ]
+}

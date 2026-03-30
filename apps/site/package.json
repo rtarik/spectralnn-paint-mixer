@@ -1,0 +1,10 @@
+{
+  "name": "@rtarik/spectralnn-paint-mixer-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ./scripts/build-site.mjs",
+    "preview": "node ./scripts/preview-site.mjs",
+    "smoke": "node ./scripts/smoke-site.mjs"
+  }
+}

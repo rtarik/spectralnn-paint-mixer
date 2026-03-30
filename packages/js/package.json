@@ -1,0 +1,34 @@
+{
+  "name": "@rtarik/spectralnn-paint-mixer",
+  "version": "0.1.0-alpha.1",
+  "license": "MIT",
+  "type": "module",
+  "description": "JavaScript runtime package for SpectralNN Paint Mixer.",
+  "keywords": [
+    "paint",
+    "color-mixing",
+    "subtractive-color",
+    "pigment",
+    "spectral"
+  ],
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node ./scripts/build-package.mjs",
+    "prepack": "npm run build",
+    "test": "node --test"
+  }
+}
