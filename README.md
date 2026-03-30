@@ -5,7 +5,7 @@ Paint-aware color mixing built on a subtractive physical base model plus a learn
 This repository contains:
 
 - a JavaScript runtime package under `packages/js`
-- a staged Kotlin runtime under `packages/kotlin`
+- a Kotlin Multiplatform runtime under `packages/kotlin`
 - a GitHub Pages landing page and demo under `apps/site`
 - the shared model artifact, fixtures, and training/evaluation tooling used to keep the runtimes aligned
 
@@ -13,7 +13,7 @@ This repository contains:
 
 - JavaScript is the current release focus and first public alpha target.
 - The landing page demos the real JavaScript runtime rather than a parallel implementation.
-- Kotlin remains in the repo, but public publishing is deferred for now.
+- Kotlin is configured for a first manual Maven Central alpha publish, but is not automated yet.
 
 ## Local Validation
 
