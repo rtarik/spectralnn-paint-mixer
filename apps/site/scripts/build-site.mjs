@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { buildPackage } from '../../../packages/js/scripts/build-package.mjs';
+import { writeGroundTruthGallery } from '../../../tools/dataset-generator/build-ground-truth-gallery.mjs';
 import {
   buildRuntimeCatalogModule,
   parseRuntimeSelection,
@@ -16,6 +17,7 @@ const repoDir = path.resolve(siteDir, '..', '..');
 const srcDir = path.join(siteDir, 'src');
 const distDir = path.join(siteDir, 'dist');
 const fixturePath = path.join(repoDir, 'artifacts', 'fixtures', 'baseline-v1', 'curated-parity.json');
+const groundTruthRoot = path.join(repoDir, 'artifacts', 'ground-truth');
 const generatedLibSourcePaths = new Set([
   path.join(srcDir, 'lib', 'paint-mixer.js'),
   path.join(srcDir, 'lib', 'runtime-catalog.js'),
@@ -149,6 +151,10 @@ export async function buildSite({
   await mkdir(distDataDir, { recursive: true });
   await writeRuntimeAssets({ activeDistDir, runtimeEntries });
   await cp(fixturePath, path.join(distDataDir, 'curated-parity.json'));
+  writeGroundTruthGallery({
+    groundTruthRoot,
+    outputPath: path.join(activeDistDir, 'qa', 'dataset-gallery', 'index.html'),
+  });
   await writeFile(
     path.join(distLibDir, 'runtime-catalog.js'),
     buildRuntimeCatalogModule({

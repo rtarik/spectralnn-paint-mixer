@@ -1,0 +1,84 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "ground-truth-cutajar-2024-binary-v1",
+  "createdAt": "2026-03-31T16:08:34.236Z",
+  "description": "Binary A+B=C rows derived from the workbook-accessible binary mixtures in the Cutajar 2024 oil-paint libraries.",
+  "colorSpace": "srgb",
+  "targetEncoding": "hex_rgb_opaque",
+  "portionUnit": "parts",
+  "supportedSourceTypes": [
+    "measured_spectral_mix"
+  ],
+  "supportedReviewStatuses": [
+    "draft",
+    "reviewed",
+    "approved"
+  ],
+  "sourceMeasuredDatasetId": "cutajar-2024-oil-paint-libraries-v1",
+  "sourceMeasuredDatasetDir": "artifacts/measured/cutajar-2024-v1",
+  "derivation": {
+    "binarySubsetOnly": true,
+    "pureInputsSource": "library2-pure-samples.jsonl",
+    "targetSource": "library2-binary-samples.jsonl",
+    "ratioTreatment": {
+      "sourceStatesRatios": false,
+      "placeholderPartsUsed": [
+        1,
+        1
+      ],
+      "note": "The accessible workbook/PDF subset identifies which paints are present in each binary mixture, but it does not explicitly state the component proportions. Inputs therefore use placeholder equal parts only to satisfy the current training-facing schema, and should not be treated as verified physical ratios."
+    },
+    "runtimeSpectralGridNm": [
+      380,
+      390,
+      400,
+      410,
+      420,
+      430,
+      440,
+      450,
+      460,
+      470,
+      480,
+      490,
+      500,
+      510,
+      520,
+      530,
+      540,
+      550,
+      560,
+      570,
+      580,
+      590,
+      600,
+      610,
+      620,
+      630,
+      640,
+      650,
+      660,
+      670,
+      680,
+      690,
+      700,
+      710,
+      720,
+      730,
+      740,
+      750
+    ],
+    "resampling": {
+      "method": "direct_integration_on_measured_grid",
+      "note": "The measured VNIR reflectance is integrated on its native wavelength grid after converting the runtime 10 nm D65-weighted color-matching sample weights into per-nanometre densities and interpolating those onto the measured grid."
+    },
+    "colorConversion": {
+      "implementation": "D65-weighted runtime CMFs from packages/js/src/spectral-basis-data.js, integrated on the measured VNIR wavelength grid and converted with XYZ_TO_SRGB_D65."
+    }
+  },
+  "files": {
+    "paints": "paints.json",
+    "samples": "samples.jsonl"
+  },
+  "sampleCount": 4
+}

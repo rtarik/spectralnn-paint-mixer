@@ -1,0 +1,128 @@
+[
+  {
+    "paintId": "cutajar-2024/COB",
+    "paintLabel": "Cobalt blue",
+    "colorHex": "#3C4987",
+    "sourceSampleId": "cutajar-2024-lib2-COB",
+    "sourceSampleCode": "COB"
+  },
+  {
+    "paintId": "cutajar-2024/ULT",
+    "paintLabel": "Ultramarine",
+    "colorHex": "#373551",
+    "sourceSampleId": "cutajar-2024-lib2-ULT",
+    "sourceSampleCode": "ULT"
+  },
+  {
+    "paintId": "cutajar-2024/PRU",
+    "paintLabel": "Prussian blue",
+    "colorHex": "#494A5B",
+    "sourceSampleId": "cutajar-2024-lib2-PRU",
+    "sourceSampleCode": "PRU"
+  },
+  {
+    "paintId": "cutajar-2024/CER",
+    "paintLabel": "Cerulean blue",
+    "colorHex": "#13598A",
+    "sourceSampleId": "cutajar-2024-lib2-CER",
+    "sourceSampleCode": "CER"
+  },
+  {
+    "paintId": "cutajar-2024/CRO",
+    "paintLabel": "Chromium green",
+    "colorHex": "#536453",
+    "sourceSampleId": "cutajar-2024-lib2-CRO",
+    "sourceSampleCode": "CRO"
+  },
+  {
+    "paintId": "cutajar-2024/VIR",
+    "paintLabel": "Viridian",
+    "colorHex": "#3A5956",
+    "sourceSampleId": "cutajar-2024-lib2-VIR",
+    "sourceSampleCode": "VIR"
+  },
+  {
+    "paintId": "cutajar-2024/EGR",
+    "paintLabel": "Earth green",
+    "colorHex": "#475E48",
+    "sourceSampleId": "cutajar-2024-lib2-EGR",
+    "sourceSampleCode": "EGR"
+  },
+  {
+    "paintId": "cutajar-2024/CDY",
+    "paintLabel": "Cadmium yellow",
+    "colorHex": "#E9DC47",
+    "sourceSampleId": "cutajar-2024-lib2-CDY",
+    "sourceSampleCode": "CDY"
+  },
+  {
+    "paintId": "cutajar-2024/CDR",
+    "paintLabel": "Cadmium red",
+    "colorHex": "#B2414C",
+    "sourceSampleId": "cutajar-2024-lib2-CDR",
+    "sourceSampleCode": "CDR"
+  },
+  {
+    "paintId": "cutajar-2024/ROC",
+    "paintLabel": "Red ochre",
+    "colorHex": "#804D45",
+    "sourceSampleId": "cutajar-2024-lib2-ROC",
+    "sourceSampleCode": "ROC"
+  },
+  {
+    "paintId": "cutajar-2024/COV",
+    "paintLabel": "Cobalt violet",
+    "colorHex": "#55355C",
+    "sourceSampleId": "cutajar-2024-lib2-COV",
+    "sourceSampleCode": "COV"
+  },
+  {
+    "paintId": "cutajar-2024/ZNW",
+    "paintLabel": "Zinc white",
+    "colorHex": "#EEEFE3",
+    "sourceSampleId": "cutajar-2024-lib2-ZNW",
+    "sourceSampleCode": "ZNW"
+  },
+  {
+    "paintId": "cutajar-2024/TIW",
+    "paintLabel": "Titanium white",
+    "colorHex": "#EAECE2",
+    "sourceSampleId": "cutajar-2024-lib2-TIW",
+    "sourceSampleCode": "TIW"
+  },
+  {
+    "paintId": "cutajar-2024/PBW",
+    "paintLabel": "Cremnitz white (Library 2)",
+    "colorHex": "#E3E4DB",
+    "sourceSampleId": "cutajar-2024-lib2-PBW",
+    "sourceSampleCode": "PBW"
+  },
+  {
+    "paintId": "cutajar-2024/FLW",
+    "paintLabel": "Flake white",
+    "colorHex": "#EBEDE3",
+    "sourceSampleId": "cutajar-2024-lib2-FLW",
+    "sourceSampleCode": "FLW"
+  },
+  {
+    "paintId": "cutajar-2024/IVB",
+    "paintLabel": "Ivory black",
+    "colorHex": "#333334",
+    "sourceSampleId": "cutajar-2024-lib2-IVB",
+    "sourceSampleCode": "IVB"
+  },
+  {
+    "paintId": "cutajar-2024/MAB",
+    "paintLabel": "Mars black",
+    "colorHex": "#424242",
+    "sourceSampleId": "cutajar-2024-lib2-MAB",
+    "sourceSampleCode": "MAB"
+  },
+  {
+    "paintId": "cutajar-2024/VIB",
+    "paintLabel": "Vine black",
+    "colorHex": "#383838",
+    "sourceSampleId": "cutajar-2024-lib2-VIB",
+    "sourceSampleCode": "VIB"
+  }
+]

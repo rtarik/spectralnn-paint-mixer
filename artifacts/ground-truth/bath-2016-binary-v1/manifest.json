@@ -1,0 +1,82 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "ground-truth-bath-2016-binary-v1",
+  "createdAt": "2026-03-31T17:07:08.510Z",
+  "description": "Binary A+B=C ground-truth rows derived from the public Bath 2016 paint-mixture reflectance archive.",
+  "colorSpace": "srgb",
+  "targetEncoding": "hex_rgb_opaque",
+  "portionUnit": "parts",
+  "supportedSourceTypes": [
+    "measured_spectral_mix"
+  ],
+  "supportedReviewStatuses": [
+    "draft",
+    "reviewed",
+    "approved"
+  ],
+  "sourceMeasuredDatasetId": "bath-2016-paint-mixtures-v1",
+  "sourceMeasuredDatasetDir": "artifacts/measured/bath-2016-v1",
+  "derivation": {
+    "binarySubsetOnly": true,
+    "pureInputsSource": "pure-samples.jsonl",
+    "pureAggregation": {
+      "method": "mean_reflectance_by_component_code",
+      "note": "Each model-facing pure input paint is the arithmetic mean of the replicate pure spectra for that pigment code."
+    },
+    "targetSource": "resolved-binary-mixture-samples.jsonl",
+    "skippedMeasuredSamples": 18,
+    "runtimeSpectralGridNm": [
+      380,
+      390,
+      400,
+      410,
+      420,
+      430,
+      440,
+      450,
+      460,
+      470,
+      480,
+      490,
+      500,
+      510,
+      520,
+      530,
+      540,
+      550,
+      560,
+      570,
+      580,
+      590,
+      600,
+      610,
+      620,
+      630,
+      640,
+      650,
+      660,
+      670,
+      680,
+      690,
+      700,
+      710,
+      720,
+      730,
+      740,
+      750
+    ],
+    "resampling": {
+      "method": "direct_integration_on_measured_grid",
+      "note": "The measured reflectance is integrated on its native wavelength grid after converting the runtime 10 nm D65-weighted color-matching sample weights into per-nanometre densities and interpolating those onto the measured grid."
+    },
+    "colorConversion": {
+      "implementation": "D65-weighted runtime CMFs from packages/js/src/spectral-basis-data.js, integrated on the measured wavelength grid and converted with XYZ_TO_SRGB_D65.",
+      "note": "Only the visible-range part of the 350-2500 nm measured spectra contributes to color because the interpolated CMF densities are zero outside the runtime visible support."
+    }
+  },
+  "files": {
+    "paints": "paints.json",
+    "samples": "samples.jsonl"
+  },
+  "sampleCount": 24
+}

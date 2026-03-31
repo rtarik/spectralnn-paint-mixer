@@ -1,0 +1,18 @@
+Sensors 2021 Pure Swatch Diagnostics
+
+Measured wavelengths: 186 (405.37-995.83 nm)
+Visible window used for summary: 405-700 nm
+
+Pigment summary:
+- V Vermilion: hex=#B96A64 visible_avg=0.273 visible_min=0.131 visible_max=0.527 R450=0.137 R550=0.146 R650=0.496
+- O Gold Ochre DD: hex=#544755 visible_avg=0.083 visible_min=0.055 visible_max=0.121 R450=0.090 R550=0.058 R650=0.089
+- B Ultramarine Blue: hex=#403B46 visible_avg=0.055 visible_min=0.043 visible_max=0.092 R450=0.060 R550=0.043 R650=0.054
+- W Kremer White: hex=#625E5E visible_avg=0.121 visible_min=0.108 visible_max=0.182 R450=0.110 R550=0.112 R650=0.126
+- C Carmine: hex=#553D49 visible_avg=0.075 visible_min=0.044 visible_max=0.158 R450=0.066 R550=0.044 R650=0.093
+- Y Naples Yellow: hex=#4B5357 visible_avg=0.092 visible_min=0.074 visible_max=0.159 R450=0.093 R550=0.080 R650=0.087
+- G Viridian Green: hex=#452E34 visible_avg=0.043 visible_min=0.026 visible_max=0.083 R450=0.034 R550=0.026 R650=0.053
+
+Interpretation:
+- The visible-band reflectance is very low for nearly all pure swatches, including the white paint.
+- The main rise in many spectra happens above 700 nm, which affects NIR analysis but not visible color appearance.
+- This strongly suggests the mismatch is inherited from the source measurements or source preprocessing rather than a simple label-mapping bug in the importer.

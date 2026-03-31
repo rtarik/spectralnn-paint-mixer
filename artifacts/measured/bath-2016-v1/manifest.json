@@ -1,0 +1,195 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "bath-2016-paint-mixtures-v1",
+  "createdAt": "2026-03-31T17:05:35Z",
+  "description": "Measured paint-mixture dataset imported from the University of Bath 2016 reflectance archive accompanying the Talanta pigment-mixture study.",
+  "sourcePaper": {
+    "title": "Estimation of semiconductor-like pigment concentrations in paint mixtures and their differentiation from paint layers using first-derivative reflectance spectra",
+    "authors": [
+      "Anuradha R. Pallipurath",
+      "Jonathan M. Skelton",
+      "Paola Ricciardi",
+      "Stephen R. Elliott"
+    ],
+    "journal": "Talanta",
+    "year": 2016,
+    "articleUrl": "https://research.manchester.ac.uk/en/publications/estimation-of-semiconductor-like-pigment-concentrations-in-paint-",
+    "datasetUrl": "https://researchportal.bath.ac.uk/en/datasets/data-for-estimation-of-semiconductor-like-pigment-concentrations-/",
+    "datasetDoi": "10.15125/BATH-00183"
+  },
+  "sourceFiles": {
+    "paperPdf": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/source-5.pdf",
+    "reflectanceDirectory": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/Reflectance-Spectra",
+    "computationalModellingDirectory": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/Computational-Modelling"
+  },
+  "medium": "prepared_paint_samples_for_reflectance_spectroscopy",
+  "support": "prepared_paint_samples_on_cards_or_panels_as_distributed_in_archive",
+  "spectralEncoding": "reflectance_factor",
+  "wavelengths": {
+    "count": 2151,
+    "rangeNm": [
+      350.0,
+      2500.0
+    ],
+    "visibleSubsetRangeNm": [
+      380,
+      750
+    ]
+  },
+  "sampleCount": 65,
+  "sampleSummary": {
+    "binary_glaze": 14,
+    "pure_colorant": 9,
+    "binary_mixture": 42
+  },
+  "binaryMixtureEligibility": {
+    "eligibleMeasuredSamples": 24,
+    "ineligibleMeasuredSamples": 18,
+    "missingPureEndpointCodes": [
+      "LW"
+    ]
+  },
+  "componentResolutionIssues": [
+    {
+      "sampleId": "bath-2016-lw-lty_33p3-66p7-r1",
+      "sampleCode": "LW-LTY_33.3-66.7",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_33p3-66p7-r2",
+      "sampleCode": "LW-LTY_33.3-66.7",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_33p3-66p7-r3",
+      "sampleCode": "LW-LTY_33.3-66.7",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_50p0-50p0-r1",
+      "sampleCode": "LW-LTY_50.0-50.0",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_50p0-50p0-r2",
+      "sampleCode": "LW-LTY_50.0-50.0",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_50p0-50p0-r3",
+      "sampleCode": "LW-LTY_50.0-50.0",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_66p7-33p3-r1",
+      "sampleCode": "LW-LTY_66.7-33.3",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_66p7-33p3-r2",
+      "sampleCode": "LW-LTY_66.7-33.3",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-lty_66p7-33p3-r3",
+      "sampleCode": "LW-LTY_66.7-33.3",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_33p3-66p7-r1",
+      "sampleCode": "LW-RL_33.3-66.7",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_33p3-66p7-r2",
+      "sampleCode": "LW-RL_33.3-66.7",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_33p3-66p7-r3",
+      "sampleCode": "LW-RL_33.3-66.7",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_50p0-50p0-r1",
+      "sampleCode": "LW-RL_50.0-50.0",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_50p0-50p0-r2",
+      "sampleCode": "LW-RL_50.0-50.0",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_50p0-50p0-r3",
+      "sampleCode": "LW-RL_50.0-50.0",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_66p7-33p3-r1",
+      "sampleCode": "LW-RL_66.7-33.3",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_66p7-33p3-r2",
+      "sampleCode": "LW-RL_66.7-33.3",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    },
+    {
+      "sampleId": "bath-2016-lw-rl_66p7-33p3-r3",
+      "sampleCode": "LW-RL_66.7-33.3",
+      "missingComponentCodes": [
+        "LW"
+      ]
+    }
+  ],
+  "curationNotes": [
+    "The archive includes both true binary mixtures and glaze/layer examples; those are kept as separate categories.",
+    "Folder names encode replicate group, pigment codes, and ratio percentages for the mixture samples.",
+    "Lead-white mixture folders are present, but no matching pure LW endpoint is distributed in the reflectance archive.",
+    "Derivative companion files are preserved in source metadata but are not needed for the measured ground-truth import."
+  ],
+  "files": {
+    "wavelengthsNm": "wavelengths_nm.json",
+    "samples": "samples.jsonl",
+    "pureSamples": "pure-samples.jsonl",
+    "binaryMixtureSamples": "binary-mixture-samples.jsonl",
+    "resolvedBinaryMixtureSamples": "resolved-binary-mixture-samples.jsonl",
+    "unresolvedBinaryMixtureSamples": "unresolved-binary-mixture-samples.jsonl",
+    "binaryGlazeSamples": "binary-glaze-samples.jsonl"
+  }
+}

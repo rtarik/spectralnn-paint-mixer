@@ -1,0 +1,81 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "sensors-2021-oil-mockups-v1",
+  "createdAt": "2026-03-31T14:41:29Z",
+  "description": "Measured oil-paint mockup dataset imported from the Sensors 2021 supplementary spreadsheets.",
+  "sourcePaper": {
+    "title": "Comparison of Imaging Models for Spectral Unmixing in Oil Painting",
+    "authors": [
+      "Federico Grillini",
+      "Jean-Baptiste Thomas",
+      "Sony George"
+    ],
+    "journal": "Sensors",
+    "year": 2021,
+    "doi": "10.3390/s21072471",
+    "articleUrl": "https://www.mdpi.com/1424-8220/21/7/2471"
+  },
+  "sourceFiles": {
+    "concentrationWorkbook": "mockups_concentration.xlsx",
+    "reflectanceWorkbook": "mockups_reflectance.xlsx"
+  },
+  "pigmentOrder": [
+    {
+      "code": "V",
+      "name": "Vermilion",
+      "manufacturerCode": "42000"
+    },
+    {
+      "code": "O",
+      "name": "Gold Ochre DD",
+      "manufacturerCode": "40214"
+    },
+    {
+      "code": "B",
+      "name": "Ultramarine Blue",
+      "manufacturerCode": "45030"
+    },
+    {
+      "code": "W",
+      "name": "Kremer White",
+      "manufacturerCode": "46360"
+    },
+    {
+      "code": "C",
+      "name": "Carmine",
+      "manufacturerCode": "23403"
+    },
+    {
+      "code": "Y",
+      "name": "Naples Yellow",
+      "manufacturerCode": "43125"
+    },
+    {
+      "code": "G",
+      "name": "Viridian Green",
+      "manufacturerCode": "44250"
+    }
+  ],
+  "ratioBasis": "mass_fraction",
+  "support": "pre-primed linen canvas with added acrylic gesso",
+  "binder": "linseed oil",
+  "spectralEncoding": "reflectance_factor",
+  "wavelengthCount": 186,
+  "wavelengthRangeNm": [
+    405.37,
+    995.83
+  ],
+  "sampleCount": 175,
+  "sampleSummary": {
+    "pure": 7,
+    "binary": 63,
+    "ternary": 105
+  },
+  "files": {
+    "wavelengthsNm": "wavelengths_nm.json",
+    "samples": "samples.jsonl",
+    "pureSamples": "pure-samples.jsonl",
+    "binarySamples": "binary-samples.jsonl",
+    "ternarySamples": "ternary-samples.jsonl"
+  }
+}

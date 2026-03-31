@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Callable, Iterable
 
 import numpy as np
+import torch
 
 MAX_COLORS = 3
 BASE_INPUT_DIM = 20
@@ -25,8 +26,10 @@ DEFAULT_KOTLIN_OUT = "tools/training/out/legacy/LearnedMixerModelWeights.kt"
 DEFAULT_CHECKPOINT_OUT = "tools/training/out/latest_checkpoint.npz"
 DEFAULT_REPORT_OUT = "tools/training/out/latest_report.txt"
 DEFAULT_HISTORY_OUT = "tools/training/out/latest_history.csv"
+DEFAULT_DEVICE = "auto"
 MANUAL_OPPONENT_CONFIG_PATH = Path(__file__).resolve().with_name("manual_opponent_pairs.json")
 MANUAL_OPPONENT_CONFIG = json.loads(MANUAL_OPPONENT_CONFIG_PATH.read_text(encoding="utf-8"))
+TORCH_DTYPE = torch.float32
 
 
 def manual_opponent_pair_key_from_spec(spec: dict) -> str:
@@ -79,6 +82,24 @@ class WarmStartError(RuntimeError):
 def repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
+
+def resolve_training_device(requested: str) -> str:
+    if requested == "cpu":
+        return "cpu"
+    if requested == "cuda":
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA was requested but is not available.")
+        return "cuda"
+    if requested == "mps":
+        if not hasattr(torch.backends, "mps") or not torch.backends.mps.is_available():
+            raise RuntimeError("MPS was requested but is not available.")
+        return "mps"
+    if torch.cuda.is_available():
+        return "cuda"
+    if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train a small exportable mixer MLP.")
     parser.add_argument("--data-dir", default=DEFAULT_DATA_DIR)
@@ -97,6 +118,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--cold-start", action="store_true")
     parser.add_argument("--report-out", default=DEFAULT_REPORT_OUT)
     parser.add_argument("--history-out", default=DEFAULT_HISTORY_OUT)
+    parser.add_argument("--device", default=DEFAULT_DEVICE, choices=("auto", "cpu", "cuda", "mps"))
     return parser.parse_args()
 
 
@@ -662,73 +684,135 @@ def make_curated_tail_sampler(
 
 
 class ExportableMLP:
-    def __init__(self, rng: np.random.Generator):
-        self.w1 = rng.normal(0.0, math.sqrt(2.0 / INPUT_DIM), size=(HIDDEN1_DIM, INPUT_DIM))
-        self.b1 = np.zeros(HIDDEN1_DIM, dtype=np.float64)
-        self.w2 = rng.normal(0.0, math.sqrt(2.0 / HIDDEN1_DIM), size=(HIDDEN2_DIM, HIDDEN1_DIM))
-        self.b2 = np.zeros(HIDDEN2_DIM, dtype=np.float64)
-        self.w3 = rng.normal(0.0, math.sqrt(2.0 / HIDDEN2_DIM), size=(OUTPUT_DIM, HIDDEN2_DIM))
-        self.b3 = np.zeros(OUTPUT_DIM, dtype=np.float64)
+    def __init__(self, rng: np.random.Generator, device: str):
+        self.device = torch.device(device)
+        self.linear1 = torch.nn.Linear(INPUT_DIM, HIDDEN1_DIM, bias=True, device=self.device, dtype=TORCH_DTYPE)
+        self.linear2 = torch.nn.Linear(HIDDEN1_DIM, HIDDEN2_DIM, bias=True, device=self.device, dtype=TORCH_DTYPE)
+        self.linear3 = torch.nn.Linear(HIDDEN2_DIM, OUTPUT_DIM, bias=True, device=self.device, dtype=TORCH_DTYPE)
+        self.optimizer = torch.optim.Adam(self._parameter_tensors(), lr=1e-3)
+        self._initialise_parameters(rng)
 
-        self.m = [np.zeros_like(value) for value in self.parameters()]
-        self.v = [np.zeros_like(value) for value in self.parameters()]
-        self.step = 0
+    def _initialise_parameters(self, rng: np.random.Generator) -> None:
+        with torch.no_grad():
+            self.linear1.weight.copy_(torch.as_tensor(
+                rng.normal(0.0, math.sqrt(2.0 / INPUT_DIM), size=(HIDDEN1_DIM, INPUT_DIM)),
+                dtype=TORCH_DTYPE,
+                device=self.device,
+            ))
+            self.linear1.bias.zero_()
+            self.linear2.weight.copy_(torch.as_tensor(
+                rng.normal(0.0, math.sqrt(2.0 / HIDDEN1_DIM), size=(HIDDEN2_DIM, HIDDEN1_DIM)),
+                dtype=TORCH_DTYPE,
+                device=self.device,
+            ))
+            self.linear2.bias.zero_()
+            self.linear3.weight.copy_(torch.as_tensor(
+                rng.normal(0.0, math.sqrt(2.0 / HIDDEN2_DIM), size=(OUTPUT_DIM, HIDDEN2_DIM)),
+                dtype=TORCH_DTYPE,
+                device=self.device,
+            ))
+            self.linear3.bias.zero_()
+
+    def _parameter_tensors(self) -> list[torch.Tensor]:
+        return [
+            self.linear1.weight,
+            self.linear1.bias,
+            self.linear2.weight,
+            self.linear2.bias,
+            self.linear3.weight,
+            self.linear3.bias,
+        ]
 
     def parameters(self) -> list[np.ndarray]:
-        return [self.w1, self.b1, self.w2, self.b2, self.w3, self.b3]
+        return [parameter.detach().cpu().numpy().astype(np.float64, copy=True) for parameter in self._parameter_tensors()]
+
+    @property
+    def w1(self) -> np.ndarray:
+        return self.parameters()[0]
+
+    @property
+    def b1(self) -> np.ndarray:
+        return self.parameters()[1]
+
+    @property
+    def w2(self) -> np.ndarray:
+        return self.parameters()[2]
+
+    @property
+    def b2(self) -> np.ndarray:
+        return self.parameters()[3]
+
+    @property
+    def w3(self) -> np.ndarray:
+        return self.parameters()[4]
+
+    @property
+    def b3(self) -> np.ndarray:
+        return self.parameters()[5]
 
     def copy_state(self) -> list[np.ndarray]:
-        return [value.copy() for value in self.parameters()]
+        return self.parameters()
 
     def load_state(self, state: list[np.ndarray]) -> None:
-        for target, source in zip(self.parameters(), state):
-            target[...] = source
+        with torch.no_grad():
+            for target, source in zip(self._parameter_tensors(), state):
+                target.copy_(torch.as_tensor(source, dtype=TORCH_DTYPE, device=self.device))
+        learning_rate = self.optimizer.param_groups[0]["lr"]
+        self.optimizer = torch.optim.Adam(self._parameter_tensors(), lr=learning_rate)
 
-    def forward(self, x: np.ndarray) -> tuple[np.ndarray, tuple[np.ndarray, ...]]:
-        z1 = x @ self.w1.T + self.b1
-        h1 = np.tanh(z1)
-        z2 = h1 @ self.w2.T + self.b2
-        h2 = np.tanh(z2)
-        y = h2 @ self.w3.T + self.b3
-        return y, (x, z1, h1, z2, h2)
+    def _forward_tensor(self, x: torch.Tensor) -> torch.Tensor:
+        h1 = torch.tanh(self.linear1(x))
+        h2 = torch.tanh(self.linear2(h1))
+        return self.linear3(h2)
 
-    def loss_and_grads(self, x: np.ndarray, y_true: np.ndarray, weights: np.ndarray) -> tuple[float, list[np.ndarray]]:
-        y_pred, cache = self.forward(x)
-        x_batch, z1, h1, z2, h2 = cache
-        diff = y_pred - y_true
-        sample_weights = weights[:, None]
-        loss = float(np.sum(sample_weights * diff * diff) / max(1, x.shape[0]))
+    def set_learning_rate(self, learning_rate: float) -> None:
+        for group in self.optimizer.param_groups:
+            group["lr"] = learning_rate
 
-        grad_y = 2.0 * sample_weights * diff / max(1, x.shape[0])
-        grad_w3 = grad_y.T @ h2
-        grad_b3 = np.sum(grad_y, axis=0)
+    def train_epoch(
+        self,
+        x: np.ndarray,
+        y_true: np.ndarray,
+        weights: np.ndarray,
+        batch_size: int,
+        rng: np.random.Generator,
+    ) -> float:
+        x_tensor = torch.as_tensor(x, dtype=TORCH_DTYPE, device=self.device)
+        y_tensor = torch.as_tensor(y_true, dtype=TORCH_DTYPE, device=self.device)
+        weight_tensor = torch.as_tensor(weights, dtype=TORCH_DTYPE, device=self.device)
 
-        grad_h2 = grad_y @ self.w3
-        grad_z2 = grad_h2 * (1.0 - np.tanh(z2) ** 2)
-        grad_w2 = grad_z2.T @ h1
-        grad_b2 = np.sum(grad_z2, axis=0)
+        indices = rng.permutation(len(x))
+        running_loss = 0.0
+        batch_count = 0
 
-        grad_h1 = grad_z2 @ self.w2
-        grad_z1 = grad_h1 * (1.0 - np.tanh(z1) ** 2)
-        grad_w1 = grad_z1.T @ x_batch
-        grad_b1 = np.sum(grad_z1, axis=0)
+        self.linear1.train()
+        self.linear2.train()
+        self.linear3.train()
+        for start in range(0, len(indices), batch_size):
+            end = start + batch_size
+            batch_indices = torch.as_tensor(indices[start:end], dtype=torch.long, device=self.device)
+            batch_x = x_tensor.index_select(0, batch_indices)
+            batch_y = y_tensor.index_select(0, batch_indices)
+            batch_weights = weight_tensor.index_select(0, batch_indices)
 
-        return loss, [grad_w1, grad_b1, grad_w2, grad_b2, grad_w3, grad_b3]
+            self.optimizer.zero_grad(set_to_none=True)
+            prediction = self._forward_tensor(batch_x)
+            loss = torch.sum(batch_weights.unsqueeze(1) * (prediction - batch_y) ** 2) / max(1, batch_x.shape[0])
+            loss.backward()
+            self.optimizer.step()
 
-    def apply_grads(self, grads: list[np.ndarray], learning_rate: float) -> None:
-        beta1 = 0.9
-        beta2 = 0.999
-        epsilon = 1e-8
-        self.step += 1
-        for index, (parameter, grad) in enumerate(zip(self.parameters(), grads)):
-            self.m[index] = beta1 * self.m[index] + (1.0 - beta1) * grad
-            self.v[index] = beta2 * self.v[index] + (1.0 - beta2) * (grad * grad)
-            m_hat = self.m[index] / (1.0 - beta1 ** self.step)
-            v_hat = self.v[index] / (1.0 - beta2 ** self.step)
-            parameter -= learning_rate * m_hat / (np.sqrt(v_hat) + epsilon)
+            running_loss += float(loss.item())
+            batch_count += 1
+
+        return running_loss / max(1, batch_count)
 
     def predict(self, x: np.ndarray) -> np.ndarray:
-        return self.forward(x)[0]
+        self.linear1.eval()
+        self.linear2.eval()
+        self.linear3.eval()
+        with torch.no_grad():
+            x_tensor = torch.as_tensor(x, dtype=TORCH_DTYPE, device=self.device)
+            return self._forward_tensor(x_tensor).detach().cpu().numpy().astype(np.float64, copy=False)
 
 
 def checkpoint_payload(
@@ -1107,22 +1191,12 @@ def train_stage(
 ) -> list[np.ndarray]:
     best_state = model.copy_state()
     best_score = float("inf")
+    model.set_learning_rate(learning_rate)
     for epoch in range(1, epochs + 1):
         features, targets, sample_weights = epoch_arrays(rng, batch_size)
         x = standardise_apply(features, feature_mean, feature_std)
         y = standardise_apply(targets, target_mean, target_std)
-
-        running_loss = 0.0
-        batch_count = 0
-        for start in range(0, len(x), batch_size):
-            end = start + batch_size
-            batch_x = x[start:end]
-            batch_y = y[start:end]
-            batch_weights = sample_weights[start:end]
-            loss, grads = model.loss_and_grads(batch_x, batch_y, batch_weights)
-            model.apply_grads(grads, learning_rate)
-            running_loss += loss
-            batch_count += 1
+        average_train_loss = model.train_epoch(x, y, sample_weights, batch_size, rng)
 
         curated_holdout_metrics = evaluate_samples(
             model,
@@ -1254,7 +1328,7 @@ def train_stage(
                 {
                     "stage": stage_name,
                     "epoch": epoch,
-                    "train_loss": running_loss / max(1, batch_count),
+                    "train_loss": average_train_loss,
                     "curated_holdout_mean_delta_e": curated_holdout_metrics["mean_delta_e"],
                     "curated_holdout_p95_delta_e": curated_holdout_metrics["p95_delta_e"],
                     "curated_holdout_max_delta_e": curated_holdout_metrics["max_delta_e"],
@@ -1280,7 +1354,7 @@ def train_stage(
         if epoch == 1 or epoch == epochs or epoch % 10 == 0:
             print(
                 f"[{stage_name}] epoch {epoch:03d}/{epochs} "
-                f"train_loss={running_loss / max(1, batch_count):.5f} "
+                f"train_loss={average_train_loss:.5f} "
                 f"holdout_meanΔE={curated_holdout_metrics['mean_delta_e']:.4f} "
                 f"holdout_p95ΔE={curated_holdout_metrics['p95_delta_e']:.4f} "
                 f"ybΔE={yellow_blue_metrics['mean_delta_e']:.4f} "
@@ -1528,6 +1602,8 @@ def top_curated_failures(
 def main() -> None:
     args = parse_args()
     rng = np.random.default_rng(args.seed)
+    torch.manual_seed(args.seed)
+    training_device = resolve_training_device(args.device)
 
     data_dir = Path(args.data_dir)
     kotlin_out = Path(args.kotlin_out)
@@ -1564,7 +1640,7 @@ def main() -> None:
     feature_mean, feature_std = standardise_fit(combined_features)
     target_mean, target_std = standardise_fit(combined_targets)
 
-    model = ExportableMLP(rng)
+    model = ExportableMLP(rng, device=training_device)
     warm_start_candidates: list[Path] = []
     if not args.cold_start:
         if args.warm_start_from:
@@ -1589,6 +1665,7 @@ def main() -> None:
         f"Loaded {len(synthetic_train)} synthetic train, {len(synthetic_val)} synthetic val, "
         f"{len(curated_train)} curated train, {len(curated_holdout)} curated holdout."
     )
+    print(f"Training backend: pytorch ({training_device})")
     with history_out.open("w", encoding="utf-8", newline="") as history_handle:
         history_writer = csv.DictWriter(
             history_handle,
@@ -1813,6 +1890,8 @@ def main() -> None:
     report_lines = [
         "Learned mixer training report",
         f"Data dir: {data_dir}",
+        "Training backend: pytorch",
+        f"Training device: {training_device}",
         warm_start_line,
         f"Checkpoint out: {checkpoint_out}",
         f"Synthetic train: {len(synthetic_train)}",

@@ -1,0 +1,77 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "ground-truth-sensors-2021-binary-v1",
+  "createdAt": "2026-03-31T15:06:09.460Z",
+  "description": "Binary A+B=C ground-truth rows derived from the measured Sensors 2021 oil-paint mockup dataset.",
+  "colorSpace": "srgb",
+  "targetEncoding": "hex_rgb_opaque",
+  "portionUnit": "parts",
+  "supportedSourceTypes": [
+    "measured_spectral_mix"
+  ],
+  "supportedReviewStatuses": [
+    "draft",
+    "reviewed",
+    "approved"
+  ],
+  "sourceMeasuredDatasetId": "sensors-2021-oil-mockups-v1",
+  "sourceMeasuredDatasetDir": "artifacts/measured/sensors-2021-v1",
+  "derivation": {
+    "binarySubsetOnly": true,
+    "pureInputsSource": "pure-samples.jsonl",
+    "targetSource": "binary-samples.jsonl",
+    "runtimeSpectralGridNm": [
+      380,
+      390,
+      400,
+      410,
+      420,
+      430,
+      440,
+      450,
+      460,
+      470,
+      480,
+      490,
+      500,
+      510,
+      520,
+      530,
+      540,
+      550,
+      560,
+      570,
+      580,
+      590,
+      600,
+      610,
+      620,
+      630,
+      640,
+      650,
+      660,
+      670,
+      680,
+      690,
+      700,
+      710,
+      720,
+      730,
+      740,
+      750
+    ],
+    "resampling": {
+      "method": "direct_integration_on_measured_grid",
+      "note": "The measured reflectance is integrated on its native wavelength grid after converting the runtime 10 nm D65-weighted color-matching sample weights into per-nanometre densities and interpolating those onto the measured grid."
+    },
+    "colorConversion": {
+      "implementation": "D65-weighted runtime CMFs from packages/js/src/spectral-basis-data.js, integrated on the measured wavelength grid and converted with XYZ_TO_SRGB_D65.",
+      "note": "This avoids the extra approximation of first downsampling the measured reflectance onto the 38-sample runtime spectral grid."
+    }
+  },
+  "files": {
+    "paints": "paints.json",
+    "samples": "samples.jsonl"
+  },
+  "sampleCount": 63
+}

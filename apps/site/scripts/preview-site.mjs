@@ -19,6 +19,7 @@ const { server, baseUrl } = await startStaticServer({
 
 console.log(`Previewing SpectralNN Paint Mixer site at ${baseUrl}/`);
 console.log(`Technical page: ${baseUrl}/technical/index.html`);
+console.log(`QA dataset gallery: ${baseUrl}/qa/dataset-gallery/index.html`);
 console.log(`Available runtimes: ${runtimeCatalog.availableRuntimes.map((entry) => entry.label).join(', ')}`);
 console.log('Press Ctrl+C to stop.');
 

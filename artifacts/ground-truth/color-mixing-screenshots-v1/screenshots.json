@@ -1,0 +1,532 @@
+[
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.20.35.png",
+    "layout": "ratio_ladder",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.20.35.png",
+    "inputs": [
+      {
+        "paintLabel": "Teal",
+        "colorHex": "#4190A2"
+      },
+      {
+        "paintLabel": "Orchid",
+        "colorHex": "#832C89"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-20-35-row-1",
+        "ratioKnown": true,
+        "parts": [
+          90,
+          10
+        ],
+        "targetLabel": "Denim Blue",
+        "displayTargetText": null,
+        "targetHex": "#2961A0",
+        "notes": null
+      },
+      {
+        "rowIndex": 2,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-20-35-row-2",
+        "ratioKnown": true,
+        "parts": [
+          70,
+          30
+        ],
+        "targetLabel": "Inkflower",
+        "displayTargetText": null,
+        "targetHex": "#244E9C",
+        "notes": null
+      },
+      {
+        "rowIndex": 3,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-20-35-row-3",
+        "ratioKnown": true,
+        "parts": [
+          50,
+          50
+        ],
+        "targetLabel": "Grape Jelly",
+        "displayTargetText": null,
+        "targetHex": "#32408A",
+        "notes": null
+      },
+      {
+        "rowIndex": 4,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-20-35-row-4",
+        "ratioKnown": true,
+        "parts": [
+          30,
+          70
+        ],
+        "targetLabel": "Plum Jam",
+        "displayTargetText": null,
+        "targetHex": "#4A308B",
+        "notes": null
+      },
+      {
+        "rowIndex": 5,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-20-35-row-5",
+        "ratioKnown": true,
+        "parts": [
+          10,
+          90
+        ],
+        "targetLabel": "Affair Purple",
+        "displayTargetText": null,
+        "targetHex": "#652A85",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.22.11.png",
+    "layout": "ratio_ladder",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.22.11.png",
+    "inputs": [
+      {
+        "paintLabel": "Gold Foil",
+        "colorHex": "#957538"
+      },
+      {
+        "paintLabel": "Ink Blue",
+        "colorHex": "#0100B4"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-22-11-row-1",
+        "ratioKnown": true,
+        "parts": [
+          90,
+          10
+        ],
+        "targetLabel": "Old Gold",
+        "displayTargetText": null,
+        "targetHex": "#8E7836",
+        "notes": null
+      },
+      {
+        "rowIndex": 2,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-22-11-row-2",
+        "ratioKnown": true,
+        "parts": [
+          70,
+          30
+        ],
+        "targetLabel": "Metallic Seaweed",
+        "displayTargetText": null,
+        "targetHex": "#687E2A",
+        "notes": null
+      },
+      {
+        "rowIndex": 3,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-22-11-row-3",
+        "ratioKnown": true,
+        "parts": [
+          50,
+          50
+        ],
+        "targetLabel": "Shining Jade",
+        "displayTargetText": null,
+        "targetHex": "#2C6362",
+        "notes": null
+      },
+      {
+        "rowIndex": 4,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-22-11-row-4",
+        "ratioKnown": true,
+        "parts": [
+          30,
+          70
+        ],
+        "targetLabel": "Electric Teal",
+        "displayTargetText": null,
+        "targetHex": "#13328D",
+        "notes": null
+      },
+      {
+        "rowIndex": 5,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-22-11-row-5",
+        "ratioKnown": true,
+        "parts": [
+          10,
+          90
+        ],
+        "targetLabel": "Night Night Blue",
+        "displayTargetText": null,
+        "targetHex": "#071991",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.23.03.png",
+    "layout": "ratio_ladder",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.23.03.png",
+    "inputs": [
+      {
+        "paintLabel": "Jungle Green",
+        "colorHex": "#3C889A"
+      },
+      {
+        "paintLabel": "Neon Pink",
+        "colorHex": "#E83391"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-23-03-row-1",
+        "ratioKnown": true,
+        "parts": [
+          10,
+          90
+        ],
+        "targetLabel": "Midnight Purple",
+        "displayTargetText": null,
+        "targetHex": "#8E1C88",
+        "notes": null
+      },
+      {
+        "rowIndex": 2,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-23-03-row-2",
+        "ratioKnown": true,
+        "parts": [
+          25,
+          75
+        ],
+        "targetLabel": "Purple Socks",
+        "displayTargetText": null,
+        "targetHex": "#66128C",
+        "notes": null
+      },
+      {
+        "rowIndex": 3,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-23-03-row-3",
+        "ratioKnown": true,
+        "parts": [
+          50,
+          50
+        ],
+        "targetLabel": "Resolution Blue",
+        "displayTargetText": null,
+        "targetHex": "#251999",
+        "notes": null
+      },
+      {
+        "rowIndex": 4,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-23-03-row-4",
+        "ratioKnown": true,
+        "parts": [
+          75,
+          25
+        ],
+        "targetLabel": "Star Command",
+        "displayTargetText": null,
+        "targetHex": "#255795",
+        "notes": null
+      },
+      {
+        "rowIndex": 5,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-23-03-row-5",
+        "ratioKnown": true,
+        "parts": [
+          100,
+          10
+        ],
+        "targetLabel": null,
+        "displayTargetText": "Name this color in the comments",
+        "targetHex": "#285E97",
+        "notes": "The displayed percentages sum to 110 rather than 100; they are preserved exactly as shown in the screenshot."
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.24.29.png",
+    "layout": "single_result",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.24.29.png",
+    "inputs": [
+      {
+        "paintLabel": "Jungle Green",
+        "colorHex": "#3D88A0"
+      },
+      {
+        "paintLabel": "Pink",
+        "colorHex": "#D77AD9"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-24-29-row-1",
+        "ratioKnown": false,
+        "parts": [
+          1,
+          1
+        ],
+        "targetLabel": "Sky Blue",
+        "displayTargetText": null,
+        "targetHex": "#4F7FCB",
+        "notes": "The screenshot shows a single result with no explicit ratio percentages."
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.25.07.png",
+    "layout": "single_result",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.25.07.png",
+    "inputs": [
+      {
+        "paintLabel": "Forest Green",
+        "colorHex": "#327257"
+      },
+      {
+        "paintLabel": "Magenta",
+        "colorHex": "#C32CAE"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-25-07-row-1",
+        "ratioKnown": false,
+        "parts": [
+          1,
+          1
+        ],
+        "targetLabel": "Celadon",
+        "displayTargetText": null,
+        "targetHex": "#294F72",
+        "notes": "The screenshot shows a single result with no explicit ratio percentages."
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.26.05.png",
+    "layout": "single_result",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.26.05.png",
+    "inputs": [
+      {
+        "paintLabel": "Metallic Blue",
+        "colorHex": "#2658CB"
+      },
+      {
+        "paintLabel": "Metallic Red",
+        "colorHex": "#C62D33"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-26-05-row-1",
+        "ratioKnown": false,
+        "parts": [
+          1,
+          1
+        ],
+        "targetLabel": "Metallic Purple",
+        "displayTargetText": null,
+        "targetHex": "#6A2E63",
+        "notes": "The screenshot shows a single result with no explicit ratio percentages."
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.26.32.png",
+    "layout": "single_result",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.26.32.png",
+    "inputs": [
+      {
+        "paintLabel": "Blue",
+        "colorHex": "#275BDE"
+      },
+      {
+        "paintLabel": "Neon Orange",
+        "colorHex": "#EB503F"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-26-32-row-1",
+        "ratioKnown": false,
+        "parts": [
+          1,
+          1
+        ],
+        "targetLabel": "Gray",
+        "displayTargetText": null,
+        "targetHex": "#445077",
+        "notes": "The screenshot shows a single result with no explicit ratio percentages."
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.27.43.png",
+    "layout": "ratio_ladder",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.27.43.png",
+    "inputs": [
+      {
+        "paintLabel": "Silver Foil",
+        "colorHex": "#7A7D83"
+      },
+      {
+        "paintLabel": "Cyber Rose",
+        "colorHex": "#D3306F"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-27-43-row-1",
+        "ratioKnown": true,
+        "parts": [
+          90,
+          10
+        ],
+        "targetLabel": "Silk Steel",
+        "displayTargetText": null,
+        "targetHex": "#767779",
+        "notes": null
+      },
+      {
+        "rowIndex": 2,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-27-43-row-2",
+        "ratioKnown": true,
+        "parts": [
+          70,
+          30
+        ],
+        "targetLabel": "Chrome Petal",
+        "displayTargetText": null,
+        "targetHex": "#82717C",
+        "notes": null
+      },
+      {
+        "rowIndex": 3,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-27-43-row-3",
+        "ratioKnown": true,
+        "parts": [
+          50,
+          50
+        ],
+        "targetLabel": "Robo-Orchid",
+        "displayTargetText": null,
+        "targetHex": "#833D67",
+        "notes": null
+      },
+      {
+        "rowIndex": 4,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-27-43-row-4",
+        "ratioKnown": true,
+        "parts": [
+          30,
+          70
+        ],
+        "targetLabel": "Hot Magenta",
+        "displayTargetText": null,
+        "targetHex": "#8C2560",
+        "notes": null
+      },
+      {
+        "rowIndex": 5,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-27-43-row-5",
+        "ratioKnown": true,
+        "parts": [
+          10,
+          90
+        ],
+        "targetLabel": "Metallic Bubblegum",
+        "displayTargetText": null,
+        "targetHex": "#9E215F",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "fileName": "Screenshot 2026-03-31 at 18.29.38.png",
+    "layout": "ratio_ladder",
+    "sourceImagePath": "/Users/tarikrahmatallah/programming/spectralnn-paint-mixer/color-mixing/Screenshot 2026-03-31 at 18.29.38.png",
+    "inputs": [
+      {
+        "paintLabel": "Black Void",
+        "colorHex": "#151B21"
+      },
+      {
+        "paintLabel": "Glowing Sun",
+        "colorHex": "#EA3A24"
+      }
+    ],
+    "rows": [
+      {
+        "rowIndex": 1,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-29-38-row-1",
+        "ratioKnown": true,
+        "parts": [
+          90,
+          10
+        ],
+        "targetLabel": "Sticky Tar",
+        "displayTargetText": null,
+        "targetHex": "#151617",
+        "notes": null
+      },
+      {
+        "rowIndex": 2,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-29-38-row-2",
+        "ratioKnown": true,
+        "parts": [
+          70,
+          30
+        ],
+        "targetLabel": "Grave Nectar",
+        "displayTargetText": null,
+        "targetHex": "#1A1411",
+        "notes": null
+      },
+      {
+        "rowIndex": 3,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-29-38-row-3",
+        "ratioKnown": true,
+        "parts": [
+          50,
+          50
+        ],
+        "targetLabel": "Elderly Eggplant",
+        "displayTargetText": null,
+        "targetHex": "#2E1318",
+        "notes": null
+      },
+      {
+        "rowIndex": 4,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-29-38-row-4",
+        "ratioKnown": true,
+        "parts": [
+          30,
+          70
+        ],
+        "targetLabel": "Violet Petal",
+        "displayTargetText": null,
+        "targetHex": "#6E1B3D",
+        "notes": null
+      },
+      {
+        "rowIndex": 5,
+        "sourceSampleId": "color-mixing-screenshot-2026-03-31-at-18-29-38-row-5",
+        "ratioKnown": true,
+        "parts": [
+          10,
+          90
+        ],
+        "targetLabel": "Radioactive Raspberry",
+        "displayTargetText": null,
+        "targetHex": "#EA3C57",
+        "notes": null
+      }
+    ]
+  }
+]

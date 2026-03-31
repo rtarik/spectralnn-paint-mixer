@@ -1,0 +1,114 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "hyperdoc-2025-manuscript-mockups-v1",
+  "createdAt": "2026-03-31T15:35:56Z",
+  "description": "Measured manuscript mock-up dataset imported from the HYPERDOC 2025 supplementary ODS workbook and HSI mean spectra CSV files.",
+  "sourcePaper": {
+    "title": "Database of diffuse reflectance infrared Fourier transform spectroscopy (DRIFTS) and hyperspectral imaging (HSI) spectra of pigments and dyes for historical document analysis",
+    "authors": [
+      "Anna Sofia Reichert",
+      "Ana Belen Lopez-Baldomero",
+      "Francisco Moronta-Montero",
+      "Ana Lopez-Montes",
+      "Eva Maria Valero",
+      "Carolina Cardell"
+    ],
+    "journal": "Analytical and Bioanalytical Chemistry",
+    "year": 2025,
+    "doi": "10.1007/s00216-025-05948-3",
+    "articleUrl": "https://link.springer.com/article/10.1007/s00216-025-05948-3",
+    "datasetUrl": "https://doi.org/10.6084/m9.figshare.28639103.v3"
+  },
+  "sourceFiles": {
+    "mockupWorkbook": "Supplementary information/Information_Mockups/MOCK-UP-SAMPLES_DATABASE .ods",
+    "chromaticCoordinateWorkbook": "Supplementary information/Color_analysis/Chromatic_Coordinates_HSI_Hyperdoc.ods",
+    "hsiCsvDirectory": "Supplementary information/HSI_Mean_Spectra/csv"
+  },
+  "supportVariants": [
+    {
+      "code": "A",
+      "label": "Paper",
+      "description": "Paper (cotton-linen(1:1))"
+    },
+    {
+      "code": "B",
+      "label": "Parchment",
+      "description": "Parchment"
+    }
+  ],
+  "spectralEncodings": {
+    "vnir": "reflectance_factor",
+    "swir": "reflectance_factor"
+  },
+  "wavelengths": {
+    "vnirCount": 121,
+    "vnirRangeNm": [
+      400.0,
+      1000.0
+    ],
+    "swirCount": 161,
+    "swirRangeNm": [
+      900.0,
+      1700.0
+    ]
+  },
+  "logicalSampleCount": 78,
+  "sampleCount": 156,
+  "logicalSampleSummary": {
+    "pure_colorant": 40,
+    "mixture": 23,
+    "superposition": 12,
+    "control": 3
+  },
+  "sampleSummary": {
+    "pure_colorant": 80,
+    "binary_mixture": 42,
+    "binary_superposition": 24,
+    "ternary_mixture": 4,
+    "control": 6
+  },
+  "binaryMixtureEligibility": {
+    "eligibleMeasuredSamples": 40,
+    "ineligibleMeasuredSamples": 2,
+    "ineligibleSampleIds": [
+      "hyperdoc-2025-57A",
+      "hyperdoc-2025-57B"
+    ]
+  },
+  "componentResolutionIssues": [
+    {
+      "logicalSampleId": "hyperdoc-2025-57",
+      "logicalSampleNumber": 57,
+      "acronym": "GB + LW",
+      "binder": "Egg glair",
+      "missingComponentCodes": [
+        "GB"
+      ]
+    },
+    {
+      "logicalSampleId": "hyperdoc-2025-58",
+      "logicalSampleNumber": 58,
+      "acronym": "GB / LW",
+      "binder": "Egg glair",
+      "missingComponentCodes": [
+        "GB"
+      ]
+    }
+  ],
+  "curationNotes": [
+    "VNIR and SWIR spectra are stored separately rather than stitched because their 900-1000 nm overlap is not numerically identical.",
+    "True pigment mixtures and superpositions are kept as distinct categories.",
+    "Paper and parchment are preserved as separate measured samples for the same logical recipe.",
+    "Component linkage is resolved from standardized acronyms plus binder rather than from free-text n.o references, which are not consistently reliable in the workbook."
+  ],
+  "files": {
+    "wavelengthsVnirNm": "wavelengths_vnir_nm.json",
+    "wavelengthsSwirNm": "wavelengths_swir_nm.json",
+    "samples": "samples.jsonl",
+    "pureColorantSamples": "pure-colorant-samples.jsonl",
+    "controlSamples": "control-samples.jsonl",
+    "binaryMixtureSamples": "binary-mixture-samples.jsonl",
+    "ternaryMixtureSamples": "ternary-mixture-samples.jsonl",
+    "binarySuperpositionSamples": "binary-superposition-samples.jsonl"
+  }
+}

@@ -1,0 +1,53 @@
+[
+  {
+    "paintId": "bath-2016/LTY",
+    "pigmentCode": "LTY",
+    "paintLabel": "Lead-tin yellow",
+    "colorHex": "#D9CF80",
+    "sourceReplicateCount": 3,
+    "sourceSampleIds": [
+      "bath-2016-lty_pure-r1",
+      "bath-2016-lty_pure-r2",
+      "bath-2016-lty_pure-r3"
+    ],
+    "sourceSampleCodes": [
+      "LTY_Pure",
+      "LTY_Pure",
+      "LTY_Pure"
+    ]
+  },
+  {
+    "paintId": "bath-2016/RL",
+    "pigmentCode": "RL",
+    "paintLabel": "Red lead",
+    "colorHex": "#D75F24",
+    "sourceReplicateCount": 3,
+    "sourceSampleIds": [
+      "bath-2016-rl_pure-r1",
+      "bath-2016-rl_pure-r2",
+      "bath-2016-rl_pure-r3"
+    ],
+    "sourceSampleCodes": [
+      "RL_Pure",
+      "RL_Pure",
+      "RL_Pure"
+    ]
+  },
+  {
+    "paintId": "bath-2016/VRM",
+    "pigmentCode": "VRM",
+    "paintLabel": "Vermilion",
+    "colorHex": "#C85F59",
+    "sourceReplicateCount": 3,
+    "sourceSampleIds": [
+      "bath-2016-vrm_pure-r1",
+      "bath-2016-vrm_pure-r2",
+      "bath-2016-vrm_pure-r3"
+    ],
+    "sourceSampleCodes": [
+      "VRM_Pure",
+      "VRM_Pure",
+      "VRM_Pure"
+    ]
+  }
+]

@@ -15,28 +15,84 @@ training, artifact refresh, and regression support.
 
 ## Install
 
-Python dependency:
+From the repo root:
 
 ```bash
 python3 -m pip install -r tools/training/requirements.txt
+npm --prefix tools/dataset-generator install
+npm --prefix apps/site install
 ```
 
-Dataset exporter dependency:
+`torch` is used for training and will fall back to CPU automatically when no GPU/MPS device is available.
+
+## Recommended Local Loop
+
+The intended workflow is:
+
+1. run the training pipeline from the repo root
+2. preview the landing page and try mixes against the freshly exported workspace model
+3. open the QA dataset gallery from the landing page to inspect the full curated corpus
+
+### Fast iteration
+
+This keeps the supplemental datasets we trust right now and excludes `Sensors 2021` until we revisit its calibration:
 
 ```bash
-cd tools/dataset-generator
-npm install
+python3 tools/training/run_training_pipeline.py \
+  --device auto \
+  --skip-compare \
+  --ground-truth-dataset artifacts/ground-truth/v1 \
+  --ground-truth-dataset artifacts/ground-truth/hyperdoc-2025-binary-v1 \
+  --ground-truth-dataset artifacts/ground-truth/cutajar-2024-binary-v1 \
+  --ground-truth-dataset artifacts/ground-truth/bath-2016-binary-v1 \
+  --ground-truth-dataset artifacts/ground-truth/color-mixing-screenshots-v1 \
+  --ground-truth-review-status approved \
+  --ground-truth-review-status reviewed \
+  --ground-truth-review-status draft
 ```
 
-## Recommended command
-
-From the staged repo root:
+### Full run with comparison report
 
 ```bash
-python3 tools/training/run_training_pipeline.py
+python3 tools/training/run_training_pipeline.py \
+  --device auto \
+  --ground-truth-dataset artifacts/ground-truth/v1 \
+  --ground-truth-dataset artifacts/ground-truth/hyperdoc-2025-binary-v1 \
+  --ground-truth-dataset artifacts/ground-truth/cutajar-2024-binary-v1 \
+  --ground-truth-dataset artifacts/ground-truth/bath-2016-binary-v1 \
+  --ground-truth-dataset artifacts/ground-truth/color-mixing-screenshots-v1 \
+  --ground-truth-review-status approved \
+  --ground-truth-review-status reviewed \
+  --ground-truth-review-status draft
 ```
 
-That command runs:
+### Inspect the result in the landing page
+
+```bash
+npm --prefix apps/site run preview
+```
+
+The preview build now also bundles the QA dataset gallery at:
+
+```text
+/qa/dataset-gallery/index.html
+```
+
+If you want the gallery as a standalone file outside the site preview:
+
+```bash
+node tools/dataset-generator/build-ground-truth-gallery.mjs
+```
+
+That writes:
+
+```text
+artifacts/ground-truth/gallery/index.html
+```
+
+## Pipeline Stages
+
+The training command runs:
 
 1. `tools/dataset-generator/export-training-data.js`
 2. `tools/training/merge-ground-truth-into-data.mjs`
@@ -76,6 +132,8 @@ Temporary legacy warm-start snapshot:
   extraction is in progress.
 - Approved ground-truth samples are merged into the derived `curated.jsonl` after export,
   replacing matching `palette/label` rows and appending new ones when needed.
+- The recommended supplemental mix currently omits `artifacts/ground-truth/sensors-2021-binary-v1`
+  because the visible colors do not line up well with the source labels.
 - The staged evaluation scripts now use the extracted JavaScript runtime as the standalone
   teacher path and comparison path.
 - The remaining extraction work is around contributor-facing ground-truth ingestion and

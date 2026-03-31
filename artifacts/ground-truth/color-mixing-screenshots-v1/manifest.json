@@ -1,0 +1,42 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "ground-truth-color-mixing-screenshots-v1",
+  "createdAt": "2026-03-31T17:42:26+00:00",
+  "description": "Observed A+B=C rows extracted from labeled paint-mixing screenshots captured from short-form videos. Colors are sampled from screenshot blobs rather than laboratory reflectance measurements.",
+  "colorSpace": "srgb",
+  "targetEncoding": "hex_rgb_opaque",
+  "portionUnit": "parts",
+  "supportedSourceTypes": [
+    "video_observed_mix"
+  ],
+  "supportedReviewStatuses": [
+    "draft",
+    "reviewed",
+    "approved"
+  ],
+  "derivation": {
+    "sourceCollectionLabel": "color-mixing",
+    "sourceKind": "video_short_screenshot",
+    "ratioTreatment": {
+      "note": "This dataset mixes explicit screenshot percentages with single-result screenshots that do not expose ratios. Ratio-unknown rows are retained with placeholder 1:1 parts and sourceRatioKnown=false."
+    },
+    "colorSampling": {
+      "method": "median_rgb_of_largest_foreground_component_within_reviewed_crop_boxes",
+      "note": "Foreground paint regions are isolated by subtracting the local crop-border background color and taking the largest connected component."
+    }
+  },
+  "curationNotes": [
+    "This source class is observational rather than laboratory measured.",
+    "Text labels and displayed percentages were manually reviewed from the screenshots.",
+    "Input and target colors are sampled from the visible paint blobs in the screenshots using local background subtraction.",
+    "Single-result screenshots without explicit percentages are retained with sourceRatioKnown=false and placeholder parts of 1:1."
+  ],
+  "sampleCount": 29,
+  "paintCount": 17,
+  "screenshotCount": 9,
+  "files": {
+    "paints": "paints.json",
+    "samples": "samples.jsonl",
+    "screenshots": "screenshots.json"
+  }
+}

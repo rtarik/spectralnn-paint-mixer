@@ -10,3 +10,8 @@ This corpus is distinct from `artifacts/fixtures`:
 Current staged sets:
 
 - `v1/`
+- `sensors-2021-binary-v1/`
+- `hyperdoc-2025-binary-v1/`
+- `cutajar-2024-binary-v1/`
+- `bath-2016-binary-v1/`
+- `color-mixing-screenshots-v1/`

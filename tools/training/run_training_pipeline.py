@@ -15,6 +15,7 @@ DEFAULT_REPORT_OUT = "tools/training/out/latest_report.txt"
 DEFAULT_HISTORY_OUT = "tools/training/out/latest_history.csv"
 DEFAULT_COMPARE_XML_OUT = "tools/eval/out/latest_compare.xml"
 DEFAULT_COMPARE_REPORT_OUT = "tools/eval/out/latest_compare.txt"
+DEFAULT_DEVICE = "auto"
 DEFAULT_EPOCHS_WARMUP = 10
 DEFAULT_EPOCHS_MIXED = 80
 DEFAULT_EPOCHS_TAIL = 80
@@ -47,6 +48,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--compare-xml-out", default=DEFAULT_COMPARE_XML_OUT)
     parser.add_argument("--compare-report-out", default=DEFAULT_COMPARE_REPORT_OUT)
     parser.add_argument("--skip-compare", action="store_true")
+    parser.add_argument("--device", default=DEFAULT_DEVICE, choices=("auto", "cpu", "cuda", "mps"))
+    parser.add_argument("--ground-truth-dataset", action="append", default=[])
+    parser.add_argument("--ground-truth-review-status", action="append", default=[])
     return parser.parse_args()
 
 
@@ -145,14 +149,20 @@ def main() -> None:
         cwd=root,
     )
 
+    merge_cmd = [
+        "node",
+        "tools/training/merge-ground-truth-into-data.mjs",
+        "--data-dir",
+        str(data_dir),
+    ]
+    for dataset in args.ground_truth_dataset:
+        merge_cmd.extend(["--dataset-dir", dataset])
+    for status in args.ground_truth_review_status:
+        merge_cmd.extend(["--review-status", status])
+
     run_step(
         name="Merge approved ground-truth targets into curated training data",
-        cmd=[
-            "node",
-            "tools/training/merge-ground-truth-into-data.mjs",
-            "--data-dir",
-            str(data_dir),
-        ],
+        cmd=merge_cmd,
         cwd=root,
     )
 
@@ -198,6 +208,8 @@ def main() -> None:
         str(report_out),
         "--history-out",
         str(history_out),
+        "--device",
+        str(args.device),
     ]
     if args.warm_start_from:
         train_cmd.extend(["--warm-start-from", str((root / args.warm_start_from).resolve())])

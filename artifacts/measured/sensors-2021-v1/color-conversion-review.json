@@ -1,0 +1,181 @@
+{
+  "measuredDatasetId": "sensors-2021-oil-mockups-v1",
+  "wavelengthRangeNm": [
+    405.37,
+    995.83
+  ],
+  "sourceWavelengthCount": 186,
+  "runtimeWavelengthGridNm": [
+    380,
+    390,
+    400,
+    410,
+    420,
+    430,
+    440,
+    450,
+    460,
+    470,
+    480,
+    490,
+    500,
+    510,
+    520,
+    530,
+    540,
+    550,
+    560,
+    570,
+    580,
+    590,
+    600,
+    610,
+    620,
+    630,
+    640,
+    650,
+    660,
+    670,
+    680,
+    690,
+    700,
+    710,
+    720,
+    730,
+    740,
+    750
+  ],
+  "flatReflectanceSanity": [
+    {
+      "level": 1,
+      "hex": "#FFFFFF"
+    },
+    {
+      "level": 0.75,
+      "hex": "#E1E1E1"
+    },
+    {
+      "level": 0.55,
+      "hex": "#C4C4C4"
+    },
+    {
+      "level": 0.25,
+      "hex": "#898989"
+    },
+    {
+      "level": 0.1,
+      "hex": "#595959"
+    }
+  ],
+  "purePaints": [
+    {
+      "sampleId": "sensors-2021-V",
+      "sampleCode": "V",
+      "label": "Vermilion (V)",
+      "reflectanceStats": {
+        "min": 0.1306,
+        "max": 0.54247,
+        "average": 0.4053367204301075
+      },
+      "hexComparison": {
+        "runtimeResampleClamp": "#B96A65",
+        "runtimeResampleZeroBelow405": "#B96A65",
+        "directMeasuredGrid": "#B96A64"
+      }
+    },
+    {
+      "sampleId": "sensors-2021-O",
+      "sampleCode": "O",
+      "label": "Gold Ochre DD (O)",
+      "reflectanceStats": {
+        "min": 0.055469,
+        "max": 0.47599,
+        "average": 0.1790168978494624
+      },
+      "hexComparison": {
+        "runtimeResampleClamp": "#544756",
+        "runtimeResampleZeroBelow405": "#544755",
+        "directMeasuredGrid": "#544755"
+      }
+    },
+    {
+      "sampleId": "sensors-2021-B",
+      "sampleCode": "B",
+      "label": "Ultramarine Blue (B)",
+      "reflectanceStats": {
+        "min": 0.043366,
+        "max": 0.45441,
+        "average": 0.17190124193548392
+      },
+      "hexComparison": {
+        "runtimeResampleClamp": "#403B46",
+        "runtimeResampleZeroBelow405": "#403B46",
+        "directMeasuredGrid": "#403B46"
+      }
+    },
+    {
+      "sampleId": "sensors-2021-W",
+      "sampleCode": "W",
+      "label": "Kremer White (W)",
+      "reflectanceStats": {
+        "min": 0.10803,
+        "max": 0.48827,
+        "average": 0.2510363440860216
+      },
+      "hexComparison": {
+        "runtimeResampleClamp": "#625E5E",
+        "runtimeResampleZeroBelow405": "#625E5E",
+        "directMeasuredGrid": "#625E5E"
+      }
+    },
+    {
+      "sampleId": "sensors-2021-C",
+      "sampleCode": "C",
+      "label": "Carmine (C)",
+      "reflectanceStats": {
+        "min": 0.044331,
+        "max": 0.60535,
+        "average": 0.25498645698924727
+      },
+      "hexComparison": {
+        "runtimeResampleClamp": "#553D49",
+        "runtimeResampleZeroBelow405": "#553D49",
+        "directMeasuredGrid": "#553D49"
+      }
+    },
+    {
+      "sampleId": "sensors-2021-Y",
+      "sampleCode": "Y",
+      "label": "Naples Yellow (Y)",
+      "reflectanceStats": {
+        "min": 0.074338,
+        "max": 0.53156,
+        "average": 0.24758591397849464
+      },
+      "hexComparison": {
+        "runtimeResampleClamp": "#4B5357",
+        "runtimeResampleZeroBelow405": "#4B5357",
+        "directMeasuredGrid": "#4B5357"
+      }
+    },
+    {
+      "sampleId": "sensors-2021-G",
+      "sampleCode": "G",
+      "label": "Viridian Green (G)",
+      "reflectanceStats": {
+        "min": 0.025535,
+        "max": 0.57704,
+        "average": 0.2538293548387097
+      },
+      "hexComparison": {
+        "runtimeResampleClamp": "#462E35",
+        "runtimeResampleZeroBelow405": "#452E34",
+        "directMeasuredGrid": "#452E34"
+      }
+    }
+  ],
+  "summary": {
+    "maxRuntimeVsDirectHexDifferenceNote": "Differences are expected to be small if the 38-sample resampling path is not the main issue.",
+    "sourceStartsAboveRuntimeGridNote": "Measured data start at 405.37 nm, above the runtime grid minimum 380 nm."
+  }
+}

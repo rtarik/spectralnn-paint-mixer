@@ -1,0 +1,69 @@
+{
+  "datasetVersion": 1,
+  "datasetId": "cutajar-2024-oil-paint-libraries-v1",
+  "createdAt": "2026-03-31T16:06:23Z",
+  "description": "Measured oil-paint library subset imported from the workbook-accessible spectra released with the Cutajar 2024 Zenodo oil-paint libraries.",
+  "sourceDataset": {
+    "title": "VNIR- and SWIR-HSI database of unvarnished oil paints on canvas",
+    "authors": [
+      "Jan Dariusz Cutajar",
+      "Mirjam Liu",
+      "Karen Mengshoel",
+      "Hilda Deborah",
+      "Tine Froysaker"
+    ],
+    "year": 2024,
+    "doi": "10.5281/zenodo.13359559",
+    "datasetUrl": "https://zenodo.org/records/13359559"
+  },
+  "sourceFiles": {
+    "library1Workbook": "Library (1).xlsx",
+    "library2Workbook": "Library (2) .xlsx",
+    "metadataPdf": "VNIR- and SWIR-HSI libraries for unvarnished oil paints.pdf"
+  },
+  "subsetPolicy": {
+    "workbookAccessibleOnly": true,
+    "note": "This import uses only the spectra explicitly tabulated in the two workbook files, not the large VNIR/SWIR datacubes distributed in the Zenodo zip archives."
+  },
+  "curationNotes": [
+    "Library (1) contributes only pure VNIR spectra.",
+    "Library (2) contributes workbook-accessible 0% turpentine, unvarnished spectra for pure paints, one ground reference, four binary mixtures, and one ternary mixture.",
+    "The source identifies mixture components in Library (2) but does not explicitly state the component proportions in the accessible workbook/PDF subset.",
+    "Mixture samples are therefore retained as real measured targets, but their proportions are marked as unstated in source metadata."
+  ],
+  "wavelengths": {
+    "library1VnirCount": 186,
+    "library1VnirRangeNm": [
+      405.369888,
+      995.827873
+    ],
+    "library2VnirCount": 186,
+    "library2VnirRangeNm": [
+      405.369888,
+      995.827873
+    ],
+    "library2SwirCount": 286,
+    "library2SwirRangeNm": [
+      951.662,
+      2505.75
+    ]
+  },
+  "sampleCount": 47,
+  "sampleSummary": {
+    "pure_colorant": 41,
+    "ground_reference": 1,
+    "binary_mixture": 4,
+    "ternary_mixture": 1
+  },
+  "files": {
+    "library1VnirWavelengthsNm": "wavelengths_library1_vnir_nm.json",
+    "library2VnirWavelengthsNm": "wavelengths_library2_vnir_nm.json",
+    "library2SwirWavelengthsNm": "wavelengths_library2_swir_nm.json",
+    "samples": "samples.jsonl",
+    "library1PureSamples": "library1-pure-samples.jsonl",
+    "library2GroundSamples": "library2-ground-samples.jsonl",
+    "library2PureSamples": "library2-pure-samples.jsonl",
+    "library2BinarySamples": "library2-binary-samples.jsonl",
+    "library2TernarySamples": "library2-ternary-samples.jsonl"
+  }
+}

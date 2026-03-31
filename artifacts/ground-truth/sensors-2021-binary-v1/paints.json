@@ -1,0 +1,58 @@
+[
+  {
+    "paintId": "sensors-2021/V",
+    "pigmentCode": "V",
+    "paintLabel": "Vermilion",
+    "colorHex": "#B96A64",
+    "sourceSampleId": "sensors-2021-V",
+    "sourceSampleCode": "V"
+  },
+  {
+    "paintId": "sensors-2021/O",
+    "pigmentCode": "O",
+    "paintLabel": "Gold Ochre DD",
+    "colorHex": "#544755",
+    "sourceSampleId": "sensors-2021-O",
+    "sourceSampleCode": "O"
+  },
+  {
+    "paintId": "sensors-2021/B",
+    "pigmentCode": "B",
+    "paintLabel": "Ultramarine Blue",
+    "colorHex": "#403B46",
+    "sourceSampleId": "sensors-2021-B",
+    "sourceSampleCode": "B"
+  },
+  {
+    "paintId": "sensors-2021/W",
+    "pigmentCode": "W",
+    "paintLabel": "Kremer White",
+    "colorHex": "#625E5E",
+    "sourceSampleId": "sensors-2021-W",
+    "sourceSampleCode": "W"
+  },
+  {
+    "paintId": "sensors-2021/C",
+    "pigmentCode": "C",
+    "paintLabel": "Carmine",
+    "colorHex": "#553D49",
+    "sourceSampleId": "sensors-2021-C",
+    "sourceSampleCode": "C"
+  },
+  {
+    "paintId": "sensors-2021/Y",
+    "pigmentCode": "Y",
+    "paintLabel": "Naples Yellow",
+    "colorHex": "#4B5357",
+    "sourceSampleId": "sensors-2021-Y",
+    "sourceSampleCode": "Y"
+  },
+  {
+    "paintId": "sensors-2021/G",
+    "pigmentCode": "G",
+    "paintLabel": "Viridian Green",
+    "colorHex": "#452E34",
+    "sourceSampleId": "sensors-2021-G",
+    "sourceSampleCode": "G"
+  }
+]

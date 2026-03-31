@@ -19,6 +19,7 @@ Current built entry points:
 
 - `dist/index.html`
 - `dist/technical/index.html`
+- `dist/qa/dataset-gallery/index.html`
 
 Current source entry points:
 
@@ -65,6 +66,9 @@ Preview locally:
 ```bash
 node scripts/preview-site.mjs
 ```
+
+The preview output will also print the QA dataset gallery URL. The site build generates that
+page from the current `artifacts/ground-truth/*` datasets, including the legacy curated core.
 
 Preview one released npm build locally:
 

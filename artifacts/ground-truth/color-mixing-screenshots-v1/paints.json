@@ -1,0 +1,156 @@
+[
+  {
+    "paintId": "color-mixing/black-void",
+    "paintLabel": "Black Void",
+    "colorHex": "#151B21",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#151B21"
+    ]
+  },
+  {
+    "paintId": "color-mixing/blue",
+    "paintLabel": "Blue",
+    "colorHex": "#275BDE",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#275BDE"
+    ]
+  },
+  {
+    "paintId": "color-mixing/cyber-rose",
+    "paintLabel": "Cyber Rose",
+    "colorHex": "#D3306F",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#D3306F"
+    ]
+  },
+  {
+    "paintId": "color-mixing/forest-green",
+    "paintLabel": "Forest Green",
+    "colorHex": "#327257",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#327257"
+    ]
+  },
+  {
+    "paintId": "color-mixing/glowing-sun",
+    "paintLabel": "Glowing Sun",
+    "colorHex": "#EA3A24",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#EA3A24"
+    ]
+  },
+  {
+    "paintId": "color-mixing/gold-foil",
+    "paintLabel": "Gold Foil",
+    "colorHex": "#957538",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#957538"
+    ]
+  },
+  {
+    "paintId": "color-mixing/ink-blue",
+    "paintLabel": "Ink Blue",
+    "colorHex": "#0100B4",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#0100B4"
+    ]
+  },
+  {
+    "paintId": "color-mixing/jungle-green",
+    "paintLabel": "Jungle Green",
+    "colorHex": "#3C889D",
+    "occurrenceCount": 2,
+    "sampledHexes": [
+      "#3C889A",
+      "#3D88A0"
+    ]
+  },
+  {
+    "paintId": "color-mixing/magenta",
+    "paintLabel": "Magenta",
+    "colorHex": "#C32CAE",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#C32CAE"
+    ]
+  },
+  {
+    "paintId": "color-mixing/metallic-blue",
+    "paintLabel": "Metallic Blue",
+    "colorHex": "#2658CB",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#2658CB"
+    ]
+  },
+  {
+    "paintId": "color-mixing/metallic-red",
+    "paintLabel": "Metallic Red",
+    "colorHex": "#C62D33",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#C62D33"
+    ]
+  },
+  {
+    "paintId": "color-mixing/neon-orange",
+    "paintLabel": "Neon Orange",
+    "colorHex": "#EB503F",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#EB503F"
+    ]
+  },
+  {
+    "paintId": "color-mixing/neon-pink",
+    "paintLabel": "Neon Pink",
+    "colorHex": "#E83391",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#E83391"
+    ]
+  },
+  {
+    "paintId": "color-mixing/orchid",
+    "paintLabel": "Orchid",
+    "colorHex": "#832C89",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#832C89"
+    ]
+  },
+  {
+    "paintId": "color-mixing/pink",
+    "paintLabel": "Pink",
+    "colorHex": "#D77AD9",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#D77AD9"
+    ]
+  },
+  {
+    "paintId": "color-mixing/silver-foil",
+    "paintLabel": "Silver Foil",
+    "colorHex": "#7A7D83",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#7A7D83"
+    ]
+  },
+  {
+    "paintId": "color-mixing/teal",
+    "paintLabel": "Teal",
+    "colorHex": "#4190A2",
+    "occurrenceCount": 1,
+    "sampledHexes": [
+      "#4190A2"
+    ]
+  }
+]

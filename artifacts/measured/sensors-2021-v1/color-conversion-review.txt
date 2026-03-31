@@ -1,0 +1,20 @@
+Measured dataset: sensors-2021-oil-mockups-v1
+Measured wavelengths: 186 (405.37-995.83 nm)
+
+Flat reflectance sanity:
+  1.00 -> #FFFFFF
+  0.75 -> #E1E1E1
+  0.55 -> #C4C4C4
+  0.25 -> #898989
+  0.10 -> #595959
+
+Pure paint comparisons:
+  V  #B96A65  direct=#B96A64  zero-below=#B96A65  min=0.131 max=0.542 avg=0.405
+  O  #544756  direct=#544755  zero-below=#544755  min=0.055 max=0.476 avg=0.179
+  B  #403B46  direct=#403B46  zero-below=#403B46  min=0.043 max=0.454 avg=0.172
+  W  #625E5E  direct=#625E5E  zero-below=#625E5E  min=0.108 max=0.488 avg=0.251
+  C  #553D49  direct=#553D49  zero-below=#553D49  min=0.044 max=0.605 avg=0.255
+  Y  #4B5357  direct=#4B5357  zero-below=#4B5357  min=0.074 max=0.532 avg=0.248
+  G  #462E35  direct=#452E34  zero-below=#452E34  min=0.026 max=0.577 avg=0.254
+
+Measured data start at 405.37 nm, above the runtime grid minimum 380 nm.
